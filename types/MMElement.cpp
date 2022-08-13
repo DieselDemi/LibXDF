@@ -107,8 +107,9 @@ namespace dd::libxdf::types {
         this->text = newText;
     }
 
+    //TODO(Demi): Needs implementation desperately
     MMElement::~MMElement() {
-        //TODO(Demi): Implement destructor
+
     }
 
 

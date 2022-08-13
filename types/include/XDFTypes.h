@@ -3,5 +3,7 @@
 
 #include "../elements/XDFRootTag.h"
 #include "../elements/MMXDFConstant.h"
+#include "../elements/MMXDFChecksum.h"
+#include "../elements/MMXDFHeader.h"
 
 #endif

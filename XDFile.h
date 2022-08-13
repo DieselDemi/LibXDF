@@ -9,6 +9,8 @@
 #include <fileio/file.h>
 
 #include "types/elements/XDFRootTag.h"
+#include "../libxdf/types/include/XDFTypes.h"
+
 
 namespace dd::libxdf {
     static uint64_t unique;

@@ -6,5 +6,6 @@
 #include "../elements/MMXDFChecksum.h"
 #include "../elements/MMXDFHeader.h"
 #include "../elements/MMXDFFlag.h"
+#include "../elements/MMXDFTable.h"
 
 #endif

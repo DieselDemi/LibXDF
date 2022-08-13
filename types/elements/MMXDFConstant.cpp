@@ -1,5 +1,6 @@
 #include "MMXDFConstant.h"
 #include "../../XDFile.h"
+#include "../MMEmbeddedData.h"
 
 //TODO(Demi): This has to move in order not to poision other libraries
 #ifdef _WIN32
@@ -37,12 +38,7 @@ namespace dd::libxdf::types::elements {
         descriptionElement->SetName("description");
         descriptionElement->SetText("TODO Implement descriptions");
 
-        auto *embeddedDataElement = new MMElement();
-        embeddedDataElement->SetName("EMBEDDEDDATA");
-        embeddedDataElement->AddAttribute({.name = "mmedaddress", .value = "0"});
-        embeddedDataElement->AddAttribute({.name = "mmedelementsizebits", .value = "32"});
-        embeddedDataElement->AddAttribute({.name = "mmedmajorstridebits", .value = "0"});
-        embeddedDataElement->AddAttribute({.name = "mmedminorstridebits", .value = "0"});
+        auto *embeddedDataElement = new MMEmbeddedData(10); //TODO Address
 
         auto *rangeHighElement = new MMElement();
         rangeHighElement->SetName("rangehigh");

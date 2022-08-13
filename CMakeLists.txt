@@ -18,7 +18,7 @@ set(SRCS
         types/elements/MMXDFConstant.h
         XDFile.cpp
         XDFile.h
-        types/elements/MMXDFHeader.cpp types/elements/MMXDFHeader.h types/elements/MMXDFChecksum.cpp types/elements/MMXDFChecksum.h types/elements/MMXDFFlag.cpp types/elements/MMXDFFlag.h)
+        types/elements/MMXDFHeader.cpp types/elements/MMXDFHeader.h types/elements/MMXDFChecksum.cpp types/elements/MMXDFChecksum.h types/elements/MMXDFFlag.cpp types/elements/MMXDFFlag.h types/elements/MMXDFAxis.cpp types/elements/MMXDFAxis.h types/MMEmbeddedData.cpp types/MMEmbeddedData.h types/MMMathElement.cpp types/MMMathElement.h types/elements/MMXDFTable.cpp types/elements/MMXDFTable.h)
 
 add_library(libxdf STATIC ${SRCS})
 

@@ -1,7 +1,5 @@
 #include "XDFile.h"
 
-#include <utility>
-
 namespace dd::libxdf {
     bool XDFile::WriteToDisk(const std::string& fileName) {
         std::ofstream file(fileName, std::ios::binary);

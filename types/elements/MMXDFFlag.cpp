@@ -1,4 +1,5 @@
 #include "MMXDFFlag.h"
+#include "../MMEmbeddedData.h"
 
 namespace dd::libxdf::types::elements {
     MMXDFFlag::MMXDFFlag() {
@@ -14,12 +15,7 @@ namespace dd::libxdf::types::elements {
         descriptionElement->SetText("TODO - description");
 
         //TODO - Move these to their own type
-        auto *embeddedDataElement = new MMElement();
-        embeddedDataElement->SetName("EMBEDDEDDATA");
-        embeddedDataElement->AddAttribute({.name = "mmedaddress", .value = "0"});
-        embeddedDataElement->AddAttribute({.name = "mmedelementsizebits", .value = "32"});
-        embeddedDataElement->AddAttribute({.name = "mmedmajorstridebits", .value = "0"});
-        embeddedDataElement->AddAttribute({.name = "mmedminorstridebits", .value = "0"});
+        auto *embeddedDataElement = new MMEmbeddedData(0);
 
         auto* maskElement = new MMElement();
         maskElement->SetName("mask");

@@ -94,7 +94,7 @@ namespace dd::libxdf::types {
             toStringStream << this->text;
 
             for (auto &element: this->children) {
-                toStringStream << std::endl << element.second->ToString();
+                toStringStream << element.second->ToString() << "\t\n";
             }
 
             toStringStream << "</" << this->name << ">" << std::endl;

@@ -1,70 +1,40 @@
 #include "MMXDFAxis.h"
 #include "../MMEmbeddedData.h"
-#include "../MMMathElement.h"
+#include "../MMMath.h"
 
 namespace dd::libxdf::types::elements {
 
-    MMXDFAxis::MMXDFAxis(char axisId) {
-        this->name = "XDFAXIS";
-
-        this->InsertAttribute({.name="id", .value=std::to_string(axisId)});
-        InsertAttribute({.name = "uniqueid", .value = this->GetUniqueHexId()});
+    MMXDFAxis::MMXDFAxis(char axisId,
+                         std::string equation,
+                         uint32_t indexCountValue,
+                         uint8_t dataTypeValue,
+                         uint8_t unitTypeValue,
+                         uint8_t decimalPlaceValue,
+                         double minValue,
+                         double maxValue,
+                         uint8_t outputTypeValue) :
+            MMElement("XDFAXIS", {
+                              {.name="id", .value=std::to_string(axisId)},
+                              {.name = "uniqueid", .value = this->GetUniqueHexId()}
+                      }
+            ) {
 
         auto *embeddedData = new MMEmbeddedData(0);
 
         if (axisId == 'x' || axisId == 'y') {
-            //Index count
-            auto *indexCountElement = new MMElement();
-            indexCountElement->SetName("indexcount");
-            indexCountElement->SetText("TODO - Index Count");
+            this->InsertElement(new MMElement("indexcount", std::to_string(indexCountValue)));
+            this->InsertElement(new MMElement("datatype", std::to_string(dataTypeValue)));
+            this->InsertElement(new MMElement("unittype", std::to_string(unitTypeValue)));
+            this->InsertElement(new MMElement("DALINK", {{.name="index", .value="0"}}));
+            this->InsertElement(new MMElement("LABEL", {{.name="index", .value="0"}, {.name="value", .value="0.00"}}));
+        } else if (axisId == 'z') {
+            this->InsertElement(new MMElement("decimalpl", std::to_string(decimalPlaceValue)));
+            this->InsertElement(new MMElement("min", std::to_string(minValue)));
+            this->InsertElement(new MMElement("max", std::to_string(maxValue)));
+            this->InsertElement(new MMElement("outputtype", std::to_string(outputTypeValue)));
+        } // Else don't add any elements, this is an error
 
-            auto *dataTypeElement = new MMElement();
-            dataTypeElement->SetName("datatype");
-            dataTypeElement->SetText("TODO - Data type value");
-
-            auto *unitTypeElement = new MMElement();
-            unitTypeElement->SetName("unittype");
-            unitTypeElement->SetText("TODO - Unit type");
-
-            auto *daLinkElement = new MMElement();
-            daLinkElement->SetName("DALINK");
-            daLinkElement->AddAttribute({.name="index", .value="0"});
-
-            auto *labelElement = new MMElement();
-            labelElement->SetName("LABEL");
-            labelElement->AddAttribute({.name="index", .value="0"});
-            labelElement->AddAttribute({.name="value", .value="0.00"});
-
-            this->InsertElement(indexCountElement);
-            this->InsertElement(dataTypeElement);
-            this->InsertElement(unitTypeElement);
-            this->InsertElement(daLinkElement);
-            this->InsertElement(labelElement);
-
-        } else {
-            auto *decimalPlaceElement = new MMElement();
-            decimalPlaceElement->SetName("decimalpl");
-            decimalPlaceElement->SetText("TODO - Decimal places");
-
-            auto *minElement = new MMElement();
-            minElement->SetName("min");
-            minElement->SetText("TODO - minimum");
-
-            auto *maxElement = new MMElement();
-            maxElement->SetName("max");
-            maxElement->SetText("TODO - maximum");
-
-            auto *outputTypeElement = new MMElement();
-            outputTypeElement->SetName("outputtype");
-            outputTypeElement->SetText("TODO - Output type value");
-
-            this->InsertElement(decimalPlaceElement);
-            this->InsertElement(minElement);
-            this->InsertElement(maxElement);
-            this->InsertElement(outputTypeElement);
-        }
-
-        auto *mathElement = new MMMathElement("X");
+        auto *mathElement = new MMMath(std::move(equation));
 
         this->InsertElement(embeddedData);
         this->InsertElement(mathElement);

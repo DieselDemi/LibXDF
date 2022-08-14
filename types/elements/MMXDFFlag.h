@@ -7,7 +7,7 @@ namespace dd::libxdf::types::elements {
 
     class MMXDFFlag : public MMElement {
     public:
-        MMXDFFlag();
+        explicit MMXDFFlag(std::string title, std::string description, uint8_t maskValue);
     };
 
 } // elements

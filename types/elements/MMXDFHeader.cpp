@@ -1,69 +1,39 @@
 #include "MMXDFHeader.h"
+#include "../MMDefaultsElement.h"
 
 namespace dd::libxdf::types::elements {
 
 
-    MMXDFHeader::MMXDFHeader() {
-        this->name = "XDFHEADER";
+    MMXDFHeader::MMXDFHeader(XDFHeaderFlags flags,
+                             float fileVersion,
+                             std::string title,
+                             std::string description,
+                             std::string author,
+                             uint32_t offset,
+                             uint32_t offsetSubtract,
+                             std::initializer_list<MMCategory *> categories) : MMElement("XDFHEADER")
+    {
+        this->InsertElement(new MMElement("flags", std::to_string((uint8_t)flags)));
+        this->InsertElement(new MMElement("fileversion", std::to_string(fileVersion)));
+        this->InsertElement(new MMElement("deftitle", std::move(title)));
+        this->InsertElement(new MMElement("description", std::move(description)));
+        this->InsertElement(new MMElement("author", std::move(author)));
+        this->InsertElement(new MMElement("BASEOFFSET", {{.name="offset", .value="TODO - offset value"}, {.name="subtract", .value="TODO - subtract value"}}));
+        this->InsertElement(new MMDefaultsElement());
+        //TODO(Demi) Move this to its own class
+        this->InsertElement(new MMElement("REGION", {
+                {.name="type", .value="TODO - fix these attributes"},
+                {.name="startaddress", .value="TODO - fix these attributes"},
+                {.name="size", .value="TODO - fix these attributes"},
+                {.name="regioncolor", .value="TODO - fix these attributes"},
+                {.name="regionflags", .value="TODO - fix these attributes"},
+                {.name="name", .value="TODO - fix these attributes"},
+                {.name="desc", .value="TODO - fix these attributes"}
+        }));
 
-        auto* flagsElement = new MMElement();
-        flagsElement->SetName("flags");
-        flagsElement->SetText("TODO - Flags");
-
-        auto* fileVersionElement = new MMElement();
-        fileVersionElement->SetName("fileversion");
-        fileVersionElement->SetText("TODO - File Version");
-
-        auto* defTitleElement = new MMElement();
-        defTitleElement->SetName("deftitle");
-        defTitleElement->SetText("TODO - Title");
-
-        auto* descriptionElement = new MMElement();
-        descriptionElement->SetName("description");
-        descriptionElement->SetText("TODO - Description Text");
-
-        auto* authorElement = new MMElement();
-        authorElement->SetName("author");
-        authorElement->SetText("TODO - Author name");
-
-        auto* baseOffsetElement = new MMElement();
-        baseOffsetElement->SetName("BASEOFFSET");
-        baseOffsetElement->AddAttribute({.name="offset",.value="TODO - offset value"});
-        baseOffsetElement->AddAttribute({.name="subtract",.value="TODO - subtract value"});
-
-        auto* defaultsElement = new MMElement();
-        defaultsElement->SetName("DEFAULTS");
-        defaultsElement->AddAttribute({.name="datasizeinbits", .value="TODO - fix these attributes"});
-        defaultsElement->AddAttribute({.name="sigdigits", .value="TODO - fix these attributes"});
-        defaultsElement->AddAttribute({.name="outputtype", .value="TODO - fix these attributes"});
-        defaultsElement->AddAttribute({.name="signed", .value="TODO - fix these attributes"});
-        defaultsElement->AddAttribute({.name="lsbfirst", .value="TODO - fix these attributes"});
-        defaultsElement->AddAttribute({.name="float", .value="TODO - fix these attributes"});
-
-        auto* regionElement = new MMElement();
-        regionElement->SetName("REGION");
-        regionElement->AddAttribute({.name="type",.value="TODO - fix these attributes"});
-        regionElement->AddAttribute({.name="startaddress",.value="TODO - fix these attributes"});
-        regionElement->AddAttribute({.name="size",.value="TODO - fix these attributes"});
-        regionElement->AddAttribute({.name="regioncolor",.value="TODO - fix these attributes"});
-        regionElement->AddAttribute({.name="regionflags",.value="TODO - fix these attributes"});
-        regionElement->AddAttribute({.name="name",.value="TODO - fix these attributes"});
-        regionElement->AddAttribute({.name="desc",.value="TODO - fix these attributes"});
-
-        auto* categoryElement = new MMElement();
-        categoryElement->SetName("CATEGORY");
-        categoryElement->AddAttribute({.name="index", .value="TODO - fix these attributes"});
-        categoryElement->AddAttribute({.name="name", .value="TODO - fix these attributes"});
-
-        this->InsertElement(flagsElement);
-        this->InsertElement(fileVersionElement);
-        this->InsertElement(defTitleElement);
-        this->InsertElement(descriptionElement);
-        this->InsertElement(authorElement);
-        this->InsertElement(baseOffsetElement);
-        this->InsertElement(defaultsElement);
-        this->InsertElement(regionElement);
-        this->InsertElement(categoryElement);
+        for(auto category : categories) {
+            this->InsertElement(category);
+        }
     }
 
 

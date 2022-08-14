@@ -9,7 +9,7 @@
 #include <fileio/file.h>
 
 #include "types/elements/XDFRootTag.h"
-#include "../libxdf/types/include/XDFTypes.h"
+#include "include/XDFTypes.h"
 
 
 namespace dd::libxdf {

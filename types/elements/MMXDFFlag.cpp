@@ -1,29 +1,13 @@
+#include <format>
+
 #include "MMXDFFlag.h"
 #include "../MMEmbeddedData.h"
 
 namespace dd::libxdf::types::elements {
-    MMXDFFlag::MMXDFFlag() {
-        this->name = "XDFFLAG";
-        this->InsertAttribute({.name = "uniqueid", .value = this->GetUniqueHexId()});
-
-        auto* titleElement = new MMElement();
-        titleElement->SetName("title");
-        titleElement->SetText("TODO - Title Text");
-
-        auto* descriptionElement = new MMElement();
-        descriptionElement->SetName("description");
-        descriptionElement->SetText("TODO - description");
-
-        //TODO - Move these to their own type
-        auto *embeddedDataElement = new MMEmbeddedData(0);
-
-        auto* maskElement = new MMElement();
-        maskElement->SetName("mask");
-        maskElement->SetText("TODO - mask data");
-
-        this->InsertElement(titleElement);
-        this->InsertElement(descriptionElement);
-        this->InsertElement(embeddedDataElement);
-        this->InsertElement(maskElement);
+    MMXDFFlag::MMXDFFlag(std::string title, std::string description, uint8_t maskValue) : MMElement("XDFFLAG", {{.name = "uniqueid", .value = this->GetUniqueHexId()}}) {
+        this->InsertElement(new MMElement("title", std::move(title)));
+        this->InsertElement(new MMElement("description", std::move(description)));
+        this->InsertElement(new MMEmbeddedData(0)); //TODO Embedded data
+        this->InsertElement(new MMElement("mask", std::format("{:#x}", maskValue)));
     }
 } // elements

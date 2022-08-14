@@ -1,6 +1,6 @@
 #include "MMXDFConstant.h"
-#include "../../XDFile.h"
 #include "../MMEmbeddedData.h"
+#include "../MMMath.h"
 
 //TODO(Demi): This has to move in order not to poision other libraries
 #ifdef _WIN32
@@ -24,53 +24,21 @@ std::string string_format( const std::string& format, Args ... args )
 #endif
 
 namespace dd::libxdf::types::elements {
-    MMXDFConstant::MMXDFConstant(flags::MMXDFConstantFlags flags) : MMElement() {
-        this->name = "XDFCONSTANT";
+    MMXDFConstant::MMXDFConstant(flags::MMXDFConstantFlags flags) :
+            MMElement("XDFCONSTANT",
+                      {
+                              {.name = "uniqueid", .value = this->GetUniqueHexId()},
+                              {.name = "flags", .value = format("{:#x}",static_cast<int>(flags))}
+                      }
+            ) {
 
-        InsertAttribute({.name = "uniqueid", .value = this->GetUniqueHexId()});
-        InsertAttribute({.name = "flags", .value = format("{:#x}", static_cast<int>(flags))});
-
-        auto *titleElement = new MMElement();
-        titleElement->SetName("title");
-        titleElement->SetText("TODO Implement titles");
-
-        auto *descriptionElement = new MMElement();
-        descriptionElement->SetName("description");
-        descriptionElement->SetText("TODO Implement descriptions");
-
-        auto *embeddedDataElement = new MMEmbeddedData(10); //TODO Address
-
-        auto *rangeHighElement = new MMElement();
-        rangeHighElement->SetName("rangehigh");
-        rangeHighElement->SetText("TODO range value here");
-
-        auto *dataTypeElement = new MMElement();
-        dataTypeElement->SetName("datatype");
-        dataTypeElement->SetText("TODO data type value here ");
-
-        auto *unitTypeElement = new MMElement();
-        unitTypeElement->SetName("unittype");
-        unitTypeElement->SetText("TODO data type value here ");
-
-        auto *dalinkElement = new MMElement();
-        dalinkElement->SetName("DALINK");
-        dalinkElement->AddAttribute({.name="index", .value="0"});
-
-        auto* mathElement = new MMElement();
-        mathElement->SetName("MATH");
-        mathElement->AddAttribute({.name="equation", .value="X"});
-        auto* mathVarElement = new MMElement();
-        mathVarElement->SetName("VAR");
-        mathVarElement->AddAttribute({.name="id", .value="X"});
-        mathElement->AddElement(mathVarElement);
-
-        InsertElement(titleElement);
-        InsertElement(descriptionElement);
-        InsertElement(embeddedDataElement);
-        InsertElement(rangeHighElement);
-        InsertElement(dataTypeElement);
-        InsertElement(unitTypeElement);
-        InsertElement(dalinkElement);
-        InsertElement(mathElement);
+        InsertElement(new MMElement("title", "TODO Implement titles"));
+        InsertElement(new MMElement("description", "TODO Implement descriptions"));
+        InsertElement(new MMEmbeddedData(10)); //TODO Address
+        InsertElement(new MMElement("rangehigh", "TODO range value here"));
+        InsertElement(new MMElement("datatype", "TODO - data type value"));
+        InsertElement(new MMElement("unittype", "TODO data type value here"));
+        InsertElement(new MMElement("DALINK", {{.name="index", .value="0"}}));
+        InsertElement(new MMMath("X+Y")); //TODO Equations
     }
 }

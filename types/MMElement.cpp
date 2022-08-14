@@ -29,7 +29,18 @@ std::string string_format( const std::string& format, Args ... args )
 
 namespace dd::libxdf::types {
 
-    MMElement::MMElement() {
+    MMElement::MMElement(std::string name, std::initializer_list<MMAttribute> attributes) {
+        this->name = std::move(name);
+        for(const auto& attr : attributes) {
+            this->attributes.insert({attr.name, attr});
+        }
+
+        this->uniqueId = XDFile::NextUnique();
+    }
+
+    MMElement::MMElement(std::string name, std::string textValue) {
+        this->name = std::move(name);
+        this->text = std::move(textValue);
         this->uniqueId = XDFile::NextUnique();
     }
 
@@ -43,7 +54,7 @@ namespace dd::libxdf::types {
     }
 
     void MMElement::AddAttribute(MMAttribute attribute) {
-        InsertAttribute(std::move(attribute));
+        InsertAttribute(attribute);
     }
 
     MMElement &MMElement::GetElement(const std::string &elementHexId) {
@@ -111,6 +122,8 @@ namespace dd::libxdf::types {
     MMElement::~MMElement() {
 
     }
+
+
 
 
 } // types

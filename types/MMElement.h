@@ -12,8 +12,8 @@
 namespace dd::libxdf::types {
     class MMElement {
     public:
-        explicit MMElement(std::string name, std::string textValue = "");
-        MMElement(std::string name, std::initializer_list<MMAttribute> attributes);
+        explicit MMElement(std::string name, std::string textValue = "", bool displayUID = false);
+        MMElement(std::string name, std::initializer_list<MMAttribute> attributes, bool displayUID = false);
         ~MMElement();
 
         void SetUniqueId(uint64_t id);
@@ -21,7 +21,7 @@ namespace dd::libxdf::types {
         void SetText(const std::string& newText);
 
         void AddElement(MMElement*);
-        void AddAttribute(MMAttribute);
+        void AddAttribute(const MMAttribute&);
 
         MMElement& GetElement(const std::string&);
         MMAttribute& GetAttribute(const std::string& attributeName);

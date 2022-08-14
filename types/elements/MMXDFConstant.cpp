@@ -24,16 +24,15 @@ std::string string_format( const std::string& format, Args ... args )
 #endif
 
 namespace dd::libxdf::types::elements {
-    MMXDFConstant::MMXDFConstant(flags::MMXDFConstantFlags flags) :
+    MMXDFConstant::MMXDFConstant(std::string title, std::string description, flags::MMXDFConstantFlags flags) :
             MMElement("XDFCONSTANT",
                       {
-                              {.name = "uniqueid", .value = this->GetUniqueHexId()},
                               {.name = "flags", .value = format("{:#x}",static_cast<int>(flags))}
-                      }
+                      }, true
             ) {
 
-        InsertElement(new MMElement("title", "TODO Implement titles"));
-        InsertElement(new MMElement("description", "TODO Implement descriptions"));
+        InsertElement(new MMElement("title", std::move(title)));
+        InsertElement(new MMElement("description", std::move(description)));
         InsertElement(new MMEmbeddedData(10)); //TODO Address
         InsertElement(new MMElement("rangehigh", "TODO range value here"));
         InsertElement(new MMElement("datatype", "TODO - data type value"));

@@ -7,7 +7,7 @@
 namespace dd::libxdf::types::elements {
     class MMXDFConstant : public MMElement {
     public:
-        explicit MMXDFConstant(flags::MMXDFConstantFlags flags);
+        explicit MMXDFConstant(std::string title, std::string description, flags::MMXDFConstantFlags flags);
     };
 }
 

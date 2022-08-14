@@ -4,7 +4,7 @@
 
 namespace dd::libxdf::types::elements {
 
-    MMXDFAxis::MMXDFAxis(char axisId,
+    MMXDFAxis::MMXDFAxis(const std::string& axisId,
                          std::string equation,
                          uint32_t indexCountValue,
                          uint8_t dataTypeValue,
@@ -14,20 +14,19 @@ namespace dd::libxdf::types::elements {
                          double maxValue,
                          uint8_t outputTypeValue) :
             MMElement("XDFAXIS", {
-                              {.name="id", .value=std::to_string(axisId)},
-                              {.name = "uniqueid", .value = this->GetUniqueHexId()}
-                      }
+                              {.name="id", .value=axisId}
+                      }, true
             ) {
 
         auto *embeddedData = new MMEmbeddedData(0);
 
-        if (axisId == 'x' || axisId == 'y') {
+        if (axisId == "X" || axisId == "Y") {
             this->InsertElement(new MMElement("indexcount", std::to_string(indexCountValue)));
             this->InsertElement(new MMElement("datatype", std::to_string(dataTypeValue)));
             this->InsertElement(new MMElement("unittype", std::to_string(unitTypeValue)));
             this->InsertElement(new MMElement("DALINK", {{.name="index", .value="0"}}));
             this->InsertElement(new MMElement("LABEL", {{.name="index", .value="0"}, {.name="value", .value="0.00"}}));
-        } else if (axisId == 'z') {
+        } else if (axisId == "Z") {
             this->InsertElement(new MMElement("decimalpl", std::to_string(decimalPlaceValue)));
             this->InsertElement(new MMElement("min", std::to_string(minValue)));
             this->InsertElement(new MMElement("max", std::to_string(maxValue)));

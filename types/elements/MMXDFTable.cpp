@@ -6,7 +6,7 @@ namespace dd::libxdf::types::elements {
             std::string title,
             std::string description,
             std::initializer_list<MMXDFAxis*> axis
-    ) : MMElement("XDFTABLE", {{.name = "uniqueid", .value = this->GetUniqueHexId()}})
+    ) : MMElement("XDFTABLE", {}, true)
     {
         this->InsertElement(new MMElement("title", std::move(title)));
         this->InsertElement(new MMElement("description", std::move(description)));

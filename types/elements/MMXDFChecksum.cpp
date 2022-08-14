@@ -10,6 +10,8 @@ namespace dd::libxdf::types::elements {
                                  uint32_t calculationMethod) : MMElement("XDFCHECKSUM") {
 
         auto *titleElement = new MMElement("title", std::move(title));
+
+        //TODO Move this to its own class
         auto *regionElement = new MMElement("REGION");
         regionElement->AddElement(new MMElement("datastart", std::format("{:#x}", regionDataStart)));
         regionElement->AddElement(new MMElement("dataend", std::format("{:#x}", regionDataEnd)));

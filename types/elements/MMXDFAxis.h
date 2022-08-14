@@ -8,7 +8,7 @@ namespace dd::libxdf::types::elements {
     class MMXDFAxis : public MMElement {
     public:
         explicit MMXDFAxis(
-                char axisId = 'x',
+                const std::string& axisId = "X",
                 std::string equation = "X",
                 uint32_t indexCountValue = 1,
                 uint8_t dataTypeValue = 0,

@@ -37,11 +37,10 @@ set(SRCS
         types/MMMath.cpp
         types/MMMath.h)
 
+#Comment this line for dynamic lib
 add_library(libxdf STATIC ${SRCS})
-
-target_link_libraries(libxdf libconsole sqlite3)
-
-#set_target_properties(libxdf PROPERTIES LINKER_LANGUAGE C)
+#Uncomment this line for dynamic lib
+#add_library(libxdf SHARED ${SRCS})
 
 install(TARGETS libxdf
         LIBRARY DESTINATION lib

@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD 23)
 set(SRCS
         exceptions/XdfFileException.cpp
         exceptions/XdfFileException.h
-        types/MMXDFConstantFlags.h
+        types/XDFConstantFlags.h
         types/MMElement.cpp
         types/MMElement.h
         types/MMAttribute.cpp

@@ -37,6 +37,7 @@ set(SRCS
         types/MMMath.cpp
         types/MMMath.h)
 
+#TODO Make a CMake variable control this
 #Comment this line for dynamic lib
 add_library(libxdf STATIC ${SRCS})
 #Uncomment this line for dynamic lib

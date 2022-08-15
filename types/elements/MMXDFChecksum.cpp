@@ -1,6 +1,8 @@
 #include "MMXDFChecksum.h"
 
+#ifdef _WIN32
 #include <format>
+#endif
 
 namespace dd::libxdf::types::elements {
     MMXDFChecksum::MMXDFChecksum(std::string title,

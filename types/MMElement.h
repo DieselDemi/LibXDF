@@ -8,7 +8,6 @@
 
 #include "MMAttribute.h"
 
-
 namespace dd::libxdf::types {
     class MMElement {
     public:

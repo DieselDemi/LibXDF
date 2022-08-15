@@ -1,31 +1,11 @@
 #include "../XDFile.h"
 
 #include "MMElement.h"
-
 #include <string>
 
-//TODO(Demi): This has to move in order not to poison other libraries
-//#ifdef _WIN32
-//
-//#include <format>
-//#include <utility>
-//
-//#define format(arg, ...) std::format(arg, __VA_ARGS__)
-//#else
-//#include <memory>
-//template<typename ... Args>
-//std::string string_format( const std::string& format, Args ... args )
-//{
-//    int size_s = std::snprintf( nullptr, 0, format.c_str(), args ... ) + 1; // Extra space for '\0'
-//    if( size_s <= 0 ){ throw std::runtime_error( "Error during formatting." ); }
-//    auto size = static_cast<size_t>( size_s );
-//    std::unique_ptr<char[]> buf( new char[ size ] );
-//    std::snprintf( buf.get(), size, format.c_str(), args ... );
-//    return std::string( buf.get(), buf.get() + size - 1 ); // We don't want the '\0' inside
-//}
-//#define format(arg, ...) string_format(arg, __VA_ARGS__)
-//#endif
-
+#ifdef _WIN32
+#include <format>
+#endif
 
 namespace dd::libxdf::types {
     MMElement::MMElement(std::string name, std::initializer_list<MMAttribute> attributes, bool displayUID) {

@@ -24,7 +24,7 @@ std::string string_format( const std::string& format, Args ... args )
 #endif
 
 namespace dd::libxdf::types::elements {
-    MMXDFConstant::MMXDFConstant(std::string title, std::string description, flags::MMXDFConstantFlags flags) :
+    MMXDFConstant::MMXDFConstant(std::string title, std::string description, flags::XDFConstantFlags flags) :
             MMElement("XDFCONSTANT",
                       {
                               {.name = "flags", .value = format("{:#x}",static_cast<int>(flags))}

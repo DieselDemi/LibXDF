@@ -1,5 +1,6 @@
 #include <format>
 #include "MMEmbeddedData.h"
+#include "../crossplatform/XdfStringFormat.h"
 
 namespace dd::libxdf::types {
     MMEmbeddedData::MMEmbeddedData(
@@ -8,7 +9,7 @@ namespace dd::libxdf::types {
             uint8_t majorStride,
             uint8_t minorStride
     ) : MMElement("EMBEDDEDDATA", {
-            {.name = "mmedaddress", .value = std::format("{:#x}", address)},
+            {.name = "mmedaddress", .value = format("{:#x}", address)},
             {.name = "mmedelementsizebits", .value = std::to_string(elementSize)},
             {.name = "mmedmajorstridebits", .value = std::to_string(majorStride)},
             {.name = "mmedminorstridebits", .value = std::to_string(minorStride)}

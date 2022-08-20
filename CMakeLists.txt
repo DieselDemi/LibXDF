@@ -35,7 +35,7 @@ set(SRCS
         types/MMCategory.cpp
         types/MMCategory.h
         types/MMMath.cpp
-        types/MMMath.h)
+        types/MMMath.h crossplatform/XdfStringFormat.h)
 
 #TODO Make a CMake variable control this
 #Comment this line for dynamic lib

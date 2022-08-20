@@ -3,11 +3,18 @@
 
 #include "../MMElement.h"
 #include "../XDFConstantFlags.h"
+#include "../types/MMEmbeddedData.h"
 
 namespace dd::libxdf::types::elements {
     class MMXDFConstant : public MMElement {
     public:
-        explicit MMXDFConstant(std::string title, std::string description, flags::XDFConstantFlags flags);
+        explicit MMXDFConstant(
+                MMEmbeddedData *embeddedData,
+                std::string title,
+                std::string description,
+                float rangeHigh,
+                float rangeLow,
+                flags::XDFConstantFlags flags);
     };
 }
 

@@ -1,11 +1,9 @@
 #include "../XDFile.h"
 
-#include "MMElement.h"
 #include <string>
 
-#ifdef _WIN32
-#include <format>
-#endif
+#include "MMElement.h"
+#include "../crossplatform/XdfStringFormat.h"
 
 namespace dd::libxdf::types {
     MMElement::MMElement(std::string name, std::initializer_list<MMAttribute> attributes, bool displayUID) {
@@ -60,7 +58,7 @@ namespace dd::libxdf::types {
     }
 
     std::string MMElement::GetUniqueHexId() const {
-        return std::format("{:#x}", this->uniqueId);
+        return format("{:#x}", this->uniqueId);
     }
 
     void MMElement::InsertAttribute(const MMAttribute &attribute) {
@@ -110,7 +108,9 @@ namespace dd::libxdf::types {
 
     //TODO(Demi): Needs implementation desperately
     MMElement::~MMElement() {
-
+        for(const auto& element : this->children) {
+            delete element.second;
+        }
     }
 
 

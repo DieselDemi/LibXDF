@@ -2,12 +2,14 @@
 #define XDFCREATOR_MMXDFAXIS_H
 
 #include "../MMElement.h"
+#include "../types/MMEmbeddedData.h"
 
 namespace dd::libxdf::types::elements {
 
     class MMXDFAxis : public MMElement {
     public:
         explicit MMXDFAxis(
+                MMEmbeddedData* embeddedData,
                 const std::string& axisId = "X",
                 std::string equation = "X",
                 uint32_t indexCountValue = 1,
@@ -16,8 +18,7 @@ namespace dd::libxdf::types::elements {
                 uint8_t decimalPlaceValue = 2,
                 double minValue = 0.00,
                 double maxValue = 255.00,
-                uint8_t outputTypeValue = 1
-                        );
+                uint8_t outputTypeValue = 1);
     };
 
 } // elements

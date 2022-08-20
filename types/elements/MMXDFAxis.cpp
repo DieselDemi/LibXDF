@@ -4,21 +4,23 @@
 
 namespace dd::libxdf::types::elements {
 
-    MMXDFAxis::MMXDFAxis(const std::string& axisId,
-                         std::string equation,
-                         uint32_t indexCountValue,
-                         uint8_t dataTypeValue,
-                         uint8_t unitTypeValue,
-                         uint8_t decimalPlaceValue,
-                         double minValue,
-                         double maxValue,
-                         uint8_t outputTypeValue) :
+    MMXDFAxis::MMXDFAxis(
+            MMEmbeddedData* embeddedData,
+            const std::string& axisId,
+            std::string equation,
+            uint32_t indexCountValue,
+            uint8_t dataTypeValue,
+            uint8_t unitTypeValue,
+            uint8_t decimalPlaceValue,
+            double minValue,
+            double maxValue,
+            uint8_t outputTypeValue) :
             MMElement("XDFAXIS", {
                               {.name="id", .value=axisId}
                       }, true
             ) {
 
-        auto *embeddedData = new MMEmbeddedData(0);
+//        auto *embeddedData = new MMEmbeddedData(0);
 
         if (axisId == "X" || axisId == "Y") {
             this->InsertElement(new MMElement("indexcount", std::to_string(indexCountValue)));

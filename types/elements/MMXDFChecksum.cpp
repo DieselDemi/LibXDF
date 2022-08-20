@@ -1,4 +1,5 @@
 #include "MMXDFChecksum.h"
+#include "../../crossplatform/XdfStringFormat.h"
 
 #ifdef _WIN32
 #include <format>
@@ -15,10 +16,10 @@ namespace dd::libxdf::types::elements {
 
         //TODO Move this to its own class
         auto *regionElement = new MMElement("REGION");
-        regionElement->AddElement(new MMElement("datastart", std::format("{:#x}", regionDataStart)));
-        regionElement->AddElement(new MMElement("dataend", std::format("{:#x}", regionDataEnd)));
-        regionElement->AddElement(new MMElement("storeaddress", std::format("{:#x}", storeAddress)));
-        regionElement->AddElement(new MMElement("calculationmethod", std::format("{:#x}", calculationMethod)));
+        regionElement->AddElement(new MMElement("datastart", format("{:#x}", regionDataStart)));
+        regionElement->AddElement(new MMElement("dataend", format("{:#x}", regionDataEnd)));
+        regionElement->AddElement(new MMElement("storeaddress", format("{:#x}", storeAddress)));
+        regionElement->AddElement(new MMElement("calculationmethod", format("{:#x}", calculationMethod)));
 
         this->InsertElement(titleElement);
         this->InsertElement(regionElement);

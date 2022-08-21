@@ -1,5 +1,3 @@
-#include <format>
-
 #include "MMXDFFlag.h"
 #include "../MMEmbeddedData.h"
 #include "../../crossplatform/XdfStringFormat.h"

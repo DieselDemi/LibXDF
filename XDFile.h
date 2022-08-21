@@ -16,7 +16,6 @@ namespace dd::libxdf {
     static uint64_t unique;
 
     class XDFile {
-
     public:
         //// Statics
         static uint64_t NextUnique() {

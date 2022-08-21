@@ -12,7 +12,7 @@ namespace dd::libxdf::types::elements {
         this->InsertElement(new MMElement("description", std::move(description)));
 
         for(auto axi : axis) {
-            this->InsertElement((MMElement *) axi);
+            this->InsertElement(static_cast<MMElement*>(axi));
         }
     }
-} // elements
+}

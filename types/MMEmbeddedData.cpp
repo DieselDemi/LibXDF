@@ -1,4 +1,3 @@
-#include <format>
 #include "MMEmbeddedData.h"
 #include "../crossplatform/XdfStringFormat.h"
 

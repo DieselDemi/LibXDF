@@ -1,6 +1,0 @@
-C:/Users/Demetry Workstation/CLionProjects/LibXDF/cmake-build-release/CMakeFiles/libxdf.dir
-C:/Users/Demetry Workstation/CLionProjects/LibXDF/cmake-build-release/CMakeFiles/edit_cache.dir
-C:/Users/Demetry Workstation/CLionProjects/LibXDF/cmake-build-release/CMakeFiles/rebuild_cache.dir
-C:/Users/Demetry Workstation/CLionProjects/LibXDF/cmake-build-release/CMakeFiles/list_install_components.dir
-C:/Users/Demetry Workstation/CLionProjects/LibXDF/cmake-build-release/CMakeFiles/install.dir
-C:/Users/Demetry Workstation/CLionProjects/LibXDF/cmake-build-release/CMakeFiles/install/local.dir

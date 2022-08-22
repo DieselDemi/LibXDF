@@ -2,7 +2,7 @@
 #define XDFCREATOR_MMXDFFLAG_H
 
 #include "../MMElement.h"
-#include "../types/MMEmbeddedData.h"
+#include "../MMEmbeddedData.h"
 
 namespace dd::libxdf::types::elements {
 

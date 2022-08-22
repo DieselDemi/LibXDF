@@ -1,0 +1,25 @@
+# ninja log v5
+5	244	6828338563522877	build.ninja	1cefd5d2e36d1d31
+33	500	6828338569579893	CMakeFiles/libxdf.dir/exceptions/XdfFileException.cpp.obj	c3735d4831ec6867
+18	1691	6828338581508209	CMakeFiles/libxdf.dir/types/MMDefaultsElement.cpp.obj	d002b42594182678
+10	1739	6828338581998029	CMakeFiles/libxdf.dir/types/elements/MMXDFPatch.cpp.obj	dd153ad056356408
+36	1746	6828338582038016	CMakeFiles/libxdf.dir/types/MMAttribute.cpp.obj	f169f68d0b541103
+40	1749	6828338582107974	CMakeFiles/libxdf.dir/types/elements/MMXDFHeader.cpp.obj	d37a42eb43e36e53
+48	1761	6828338582198045	CMakeFiles/libxdf.dir/types/elements/XDFRootTag.cpp.obj	1fddc0a1d964e360
+1	1813	6828338582717943	CMakeFiles/libxdf.dir/types/MMMath.cpp.obj	5ff30d698b18c9ac
+21	1822	6828338582807900	CMakeFiles/libxdf.dir/types/MMCategory.cpp.obj	73d36b0d9675fd5f
+52	2920	6828338593753093	CMakeFiles/libxdf.dir/types/elements/MMXDFChecksum.cpp.obj	88328397d33646b9
+68	2948	6828338594063099	CMakeFiles/libxdf.dir/types/MMEmbeddedData.cpp.obj	b311a8a0000a8721
+14	2990	6828338594473055	CMakeFiles/libxdf.dir/types/elements/MMXDFPatchEntry.cpp.obj	482f7022a5098d1
+2	2763	6828338754680187	CMakeFiles/libxdf.dir/types/MMElement.cpp.obj	b58cc04a61672703
+16	2602	6828339035763156	CMakeFiles/libxdf.dir/types/elements/MMXDFFlag.cpp.obj	dc7769b2939d8b65
+2	2705	6828339036803078	CMakeFiles/libxdf.dir/types/MMElement.cpp.obj	b58cc04a61672703
+19	1542	6828339094752006	CMakeFiles/libxdf.dir/types/elements/MMXDFTable.cpp.obj	fa8c697f6aec38ab
+15	1560	6828339094931916	CMakeFiles/libxdf.dir/types/elements/MMXDFAxis.cpp.obj	584b1646ecb7b8c3
+24	1584	6828339095171801	CMakeFiles/libxdf.dir/types/elements/MMXDFFunction.cpp.obj	fdbb771033e9cc6f
+2	2762	6828339106917376	CMakeFiles/libxdf.dir/types/MMElement.cpp.obj	b58cc04a61672703
+8	1596	6828339414000687	CMakeFiles/libxdf.dir/XDFile.cpp.obj	f0844e5920e6b466
+12	1551	6828339509371771	CMakeFiles/libxdf.dir/XDFile.cpp.obj	f0844e5920e6b466
+8	2601	6828339519856746	CMakeFiles/libxdf.dir/types/elements/MMXDFConstant.cpp.obj	c0b3d7a234f097d7
+1	2608	6828339519956697	CMakeFiles/libxdf.dir/types/MMElement.cpp.obj	b58cc04a61672703
+2608	2789	6828339521146127	libxdf.lib	1eca78669e665726

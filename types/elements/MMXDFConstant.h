@@ -2,8 +2,8 @@
 #define XDFCREATOR_MMXDFCONSTANT_H
 
 #include "../MMElement.h"
+#include "../MMEmbeddedData.h"
 #include "../XDFConstantFlags.h"
-#include "../types/MMEmbeddedData.h"
 
 namespace dd::libxdf::types::elements {
     class MMXDFConstant : public MMElement {

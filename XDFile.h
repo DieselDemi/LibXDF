@@ -6,7 +6,6 @@
 #include <map>
 #include <utility>
 #include <vector>
-#include <fileio/file.h>
 
 #include "types/elements/XDFRootTag.h"
 #include "include/XDFTypes.h"

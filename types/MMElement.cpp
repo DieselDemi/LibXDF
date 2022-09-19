@@ -113,7 +113,15 @@ namespace dd::libxdf::types {
         }
     }
 
+    std::vector<MMElement *> MMElement::GetAllElements() {
+        std::vector<MMElement *> _ret;
 
+        for (const auto &elementPair: children) {
+            _ret.emplace_back(elementPair.second);
+        }
+
+        return _ret;
+    }
 
 
 } // types

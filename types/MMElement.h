@@ -23,6 +23,9 @@ namespace dd::libxdf::types {
         void AddAttribute(const MMAttribute&);
 
         MMElement& GetElement(const std::string&);
+
+        std::vector<MMElement*> GetAllElements();
+
         MMAttribute& GetAttribute(const std::string& attributeName);
         [[nodiscard]] uint64_t GetUniqueId() const;
         [[nodiscard]] std::string GetUniqueHexId() const;

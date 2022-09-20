@@ -4,6 +4,10 @@ project(libxdf)
 
 set(CMAKE_CXX_STANDARD 23)
 
+option(LIBXDF_BUILD_TESTS "Build test cases" ON)
+option(LIBXDF_BUILD_STATIC "Build as static library" ON)
+option(LIBXDF_BUILD_SHARED "Build as shared library" ON)
+
 set(SRCS
         exceptions/XdfFileException.cpp
         exceptions/XdfFileException.h
@@ -45,12 +49,23 @@ set(SRCS
         types/elements/MMXDFPatchEntry.h
 )
 
-#TODO Make a CMake variable control this
-#Comment this line for dynamic lib
-add_library(libxdf STATIC ${SRCS})
-#Uncomment this line for dynamic lib
-#add_library(libxdf SHARED ${SRCS})
+if(LIBXDF_BUILD_TESTS)
+    add_subdirectory(tests)
+endif()
 
-install(TARGETS libxdf
-        LIBRARY DESTINATION lib
-        ARCHIVE DESTINATION lib)
+
+if(LIBXDF_BUILD_STATIC)
+    add_library(libxdf-static STATIC ${SRCS})
+
+    install(TARGETS libxdf-static
+            LIBRARY DESTINATION lib
+            ARCHIVE DESTINATION lib)
+endif()
+
+if(LIBXDF_BUILD_SHARED)
+    add_library(libxdf-shared SHARED ${SRCS})
+
+    install(TARGETS libxdf-shared
+            LIBRARY DESTINATION lib
+            ARCHIVE DESTINATION lib)
+endif()

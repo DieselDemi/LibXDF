@@ -33,3 +33,35 @@ int main(int argc, char** argv) {
     return 0; 
 }
 ```
+##Outputs
+```html
+<XDFFORMAT version="1.700000"><XDFHEADER><flags>1</flags>
+	
+<fileversion>0.000000</fileversion>
+	
+<deftitle>Example Title</deftitle>
+	
+<description>Description</description>
+	
+<author>Author</author>
+	
+<BASEOFFSET offset="TODO - offset value" subtract="TODO - subtract value"/>
+	
+<DEFAULTS datasizeinbits="8" float="0" lsbfirst="0" outputtype="1" sigdigits="2" signed="0"/>
+	
+<REGION desc="TODO - fix these attributes" name="TODO - fix these attributes" regioncolor="TODO - fix these attributes" regionflags="TODO - fix these attributes" size="TODO - fix these attributes" startaddress="TODO - fix these attributes" type="TODO - fix these attributes"/>
+	
+</XDFHEADER>
+	
+<XDFFLAG uniqueid="0x00000020"><EMBEDDEDDATA mmedaddress="0x0000" mmedelementsizebits="32" mmedmajorstridebits="0" mmedminorstridebits="0"/>
+	
+<title>Basic Flag</title>
+	
+<description>Description</description>
+	
+<mask>0x0</mask>
+	
+</XDFFLAG>
+	
+</XDFFORMAT>
+```

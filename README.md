@@ -25,7 +25,7 @@ int main(int argc, char** argv) {
             ), //Embedded Data
             "Basic Flag",
             "Description", 
-            0, //Mask value as uint8_t 
+            0 //Mask value as uint8_t 
     ));
     
     std::cout << rootTag.ToString() << std::endl; 

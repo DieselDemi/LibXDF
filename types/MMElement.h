@@ -22,6 +22,9 @@ namespace dd::libxdf::types {
         void AddElement(MMElement*);
         void AddAttribute(const MMAttribute&);
 
+        void RemoveElement(std::string& uid);
+        void RemoveAttribute(std::string& key);
+
         MMElement& GetElement(const std::string&);
 
         std::vector<MMElement*> GetAllElements();

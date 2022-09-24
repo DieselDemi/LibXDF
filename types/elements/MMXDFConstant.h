@@ -6,7 +6,7 @@
 #include "../XDFConstantFlags.h"
 
 namespace dd::libxdf::types::elements {
-    class MMXDFConstant : public MMElement {
+    class MMXDFConstant final : public MMElement {
     public:
         explicit MMXDFConstant(
                 MMEmbeddedData *embeddedData,

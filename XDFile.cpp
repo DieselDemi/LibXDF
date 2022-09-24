@@ -15,10 +15,10 @@ namespace dd::libxdf {
     }
 
     void XDFile::RemoveElement(std::string& uid) {
-        //TODO Implement this method
+        this->documentRoot.RemoveElement(uid);
     }
 
-    //TODO This is a big string to just pass lol
+    //TODO This is a big string to pbv
     std::string XDFile::Print() {
         return documentRoot.ToString();
     }

@@ -20,6 +20,7 @@ namespace dd::libxdf::types::elements {
         this->InsertElement(new MMElement("author", std::move(author)));
         this->InsertElement(new MMElement("BASEOFFSET", {{.name="offset", .value="TODO - offset value"}, {.name="subtract", .value="TODO - subtract value"}}));
         this->InsertElement(new MMDefaultsElement());
+
         //TODO(Demi) Move this to its own class
         this->InsertElement(new MMElement("REGION", {
                 {.name="type", .value="TODO - fix these attributes"},

@@ -2,16 +2,19 @@
 #include <XDFTypes.h>
 #include <gtest/gtest.h>
 
+using namespace dd::libxdf::types;
+using namespace dd::libxdf::types::elements;
+
 TEST(TestSuiteTest, TestSuiteAssertions) {
     EXPECT_STRNE("HELLO", "WORLD");
     EXPECT_EQ(7 * 6, 42);
 }
 
 TEST(GenerationNotEmpty, DocumentIsGenerated) {
-    dd::libxdf::types::elements::XDFRootTag rootTag;
+    XDFRootTag rootTag;
 
-    rootTag.AddElement(new dd::libxdf::types::elements::MMXDFHeader(
-        dd::libxdf::types::elements::XDFHeaderFlags::UNKNOWN,
+    rootTag.AddElement(new MMXDFHeader(
+        XDFHeaderFlags::UNKNOWN,
         0.f,
         "Hello",
         "Description",
@@ -25,10 +28,10 @@ TEST(GenerationNotEmpty, DocumentIsGenerated) {
 }
 
 TEST(GenerationNotEmpty, DocumentHasASingleElement) {
-    dd::libxdf::types::elements::XDFRootTag rootTag;
+    XDFRootTag rootTag;
 
-    rootTag.AddElement(new dd::libxdf::types::elements::MMXDFHeader(
-            dd::libxdf::types::elements::XDFHeaderFlags::UNKNOWN,
+    rootTag.AddElement(new MMXDFHeader(
+            XDFHeaderFlags::UNKNOWN,
             0.f,
             "Hello",
             "Description",
@@ -43,10 +46,10 @@ TEST(GenerationNotEmpty, DocumentHasASingleElement) {
 }
 
 TEST(GenerationStringNotEmpty, DocumentHasOutputAsString) {
-    dd::libxdf::types::elements::XDFRootTag rootTag;
+    XDFRootTag rootTag;
 
-    rootTag.AddElement(new dd::libxdf::types::elements::MMXDFHeader(
-            dd::libxdf::types::elements::XDFHeaderFlags::UNKNOWN,
+    rootTag.AddElement(new MMXDFHeader(
+            XDFHeaderFlags::UNKNOWN,
             0.f, //File Version
             "Example Title", //Title
             "Description", //Description
@@ -56,8 +59,8 @@ TEST(GenerationStringNotEmpty, DocumentHasOutputAsString) {
             {} //An initializer list of categories
     ));
 
-    rootTag.AddElement(new dd::libxdf::types::elements::MMXDFFlag(
-            new dd::libxdf::types::MMEmbeddedData(
+    rootTag.AddElement(new MMXDFFlag(
+            new MMEmbeddedData(
                     0 //Address
             ), //Embedded Data
             "Basic Flag",
@@ -68,4 +71,13 @@ TEST(GenerationStringNotEmpty, DocumentHasOutputAsString) {
     EXPECT_STRNE(rootTag.ToString().c_str(), "");
 }
 
+/**
+ * Region generation testing
+ */
 
+//<REGION type="0xFFFFFFFF" startaddress="0x0" size="700000" regionflags="0x0" name="Binary File" desc="" />
+TEST(RegionTest, RegionElementGeneration) {
+    auto* region = new MMRegion(RegionType::DEFAULT, 0, 700000, RegionFlag::DEFAULT, "Binary File", "");
+    EXPECT_STREQ(region->ToString().c_str(), "<REGION desc=\"\" name=\"Binary File\" regionflags=\"0x0000\" size=\"0xaae60\" startaddress=\"0x0000\" type=\"0xffffffff\"/>\n");
+    delete region;
+}

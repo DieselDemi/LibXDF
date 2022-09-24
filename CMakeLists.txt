@@ -47,7 +47,7 @@ set(SRCS
         types/elements/MMXDFPatch.h
         types/elements/MMXDFPatchEntry.cpp
         types/elements/MMXDFPatchEntry.h
-)
+        types/MMRegion.cpp types/MMRegion.h)
 
 if(LIBXDF_BUILD_TESTS)
     add_subdirectory(tests)

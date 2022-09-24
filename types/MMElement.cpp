@@ -123,5 +123,13 @@ namespace dd::libxdf::types {
         return _ret;
     }
 
+    void MMElement::RemoveElement(std::string &uid) {
+        this->children.erase(uid);
+    }
+
+    void MMElement::RemoveAttribute(std::string &key) {
+        this->attributes.erase(key);
+    }
+
 
 } // types

@@ -14,7 +14,7 @@ TEST(GenerationNotEmpty, DocumentIsGenerated) {
     XDFRootTag rootTag;
 
     rootTag.AddElement(new MMXDFHeader(
-        XDFHeaderFlags::UNKNOWN,
+        enums::HeaderFlags::UNKNOWN,
         0.f,
         "Hello",
         "Description",
@@ -31,7 +31,7 @@ TEST(GenerationNotEmpty, DocumentHasASingleElement) {
     XDFRootTag rootTag;
 
     rootTag.AddElement(new MMXDFHeader(
-            XDFHeaderFlags::UNKNOWN,
+            enums::HeaderFlags::UNKNOWN,
             0.f,
             "Hello",
             "Description",
@@ -49,7 +49,7 @@ TEST(GenerationStringNotEmpty, DocumentHasOutputAsString) {
     XDFRootTag rootTag;
 
     rootTag.AddElement(new MMXDFHeader(
-            XDFHeaderFlags::UNKNOWN,
+            enums::HeaderFlags::UNKNOWN,
             0.f, //File Version
             "Example Title", //Title
             "Description", //Description
@@ -77,7 +77,8 @@ TEST(GenerationStringNotEmpty, DocumentHasOutputAsString) {
 
 //<REGION type="0xFFFFFFFF" startaddress="0x0" size="700000" regionflags="0x0" name="Binary File" desc="" />
 TEST(RegionTest, RegionElementGeneration) {
-    auto* region = new MMRegion(RegionType::DEFAULT, 0, 700000, RegionFlag::DEFAULT, "Binary File", "");
+    auto* region = new MMRegion(enums::RegionType::DEFAULT, 0, 700000, enums::RegionFlag::DEFAULT, "Binary File", "");
     EXPECT_STREQ(region->ToString().c_str(), "<REGION desc=\"\" name=\"Binary File\" regionflags=\"0x0000\" size=\"0xaae60\" startaddress=\"0x0000\" type=\"0xffffffff\"/>\n");
     delete region;
+
 }

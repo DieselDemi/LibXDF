@@ -11,7 +11,6 @@ option(LIBXDF_BUILD_SHARED "Build as shared library" ON)
 set(SRCS
         exceptions/XdfFileException.cpp
         exceptions/XdfFileException.h
-        types/XDFConstantFlags.h
         types/MMElement.cpp
         types/MMElement.h
         types/MMAttribute.cpp
@@ -47,7 +46,9 @@ set(SRCS
         types/elements/MMXDFPatch.h
         types/elements/MMXDFPatchEntry.cpp
         types/elements/MMXDFPatchEntry.h
-        types/MMRegion.cpp types/MMRegion.h)
+        types/MMRegion.cpp types/MMRegion.h types/MMTypes.h)
+
+include_directories(types)
 
 if(LIBXDF_BUILD_TESTS)
     add_subdirectory(tests)

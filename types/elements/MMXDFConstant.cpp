@@ -3,7 +3,7 @@
 #include "../../crossplatform/XdfStringFormat.h"
 
 namespace dd::libxdf::types::elements {
-    MMXDFConstant::MMXDFConstant(MMEmbeddedData *embeddedData, std::string title, std::string description, float rangeHigh, float rangeLow, flags::XDFConstantFlags flags) :
+    MMXDFConstant::MMXDFConstant(MMEmbeddedData *embeddedData, std::string title, std::string description, float rangeHigh, float rangeLow, enums::ConstantFlags flags) :
             MMElement("XDFCONSTANT",
                       {
                               {.name = "flags", .value = format("{:#x}",static_cast<int>(flags))}

@@ -1,9 +1,9 @@
 #ifndef XDFCREATOR_MMXDFCONSTANT_H
 #define XDFCREATOR_MMXDFCONSTANT_H
 
-#include "../MMElement.h"
-#include "../MMEmbeddedData.h"
-#include "../XDFConstantFlags.h"
+#include <MMElement.h>
+#include <MMEmbeddedData.h>
+#include <MMTypes.h>
 
 namespace dd::libxdf::types::elements {
     class MMXDFConstant final : public MMElement {
@@ -14,7 +14,7 @@ namespace dd::libxdf::types::elements {
                 std::string description,
                 float rangeHigh,
                 float rangeLow,
-                flags::XDFConstantFlags flags);
+                enums::ConstantFlags flags);
     };
 }
 

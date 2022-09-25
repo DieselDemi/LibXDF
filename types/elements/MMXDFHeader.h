@@ -1,18 +1,15 @@
 #ifndef XDFCREATOR_MMXDFHEADER_H
 #define XDFCREATOR_MMXDFHEADER_H
 
-#include "../MMElement.h"
-#include "../MMCategory.h"
+#include <MMElement.h>
+#include <MMCategory.h>
+#include <MMTypes.h>
 
 namespace dd::libxdf::types::elements {
-    enum class XDFHeaderFlags {
-        UNKNOWN = 0x1
-    };
-
     class MMXDFHeader : public MMElement {
     public:
         explicit MMXDFHeader(
-                XDFHeaderFlags flags,
+                enums::HeaderFlags flags,
                 float fileVersion,
                 std::string title,
                 std::string description,

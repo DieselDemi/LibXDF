@@ -6,10 +6,10 @@
 
 namespace dd::libxdf::types {
     MMRegion::MMRegion(
-            RegionType type,
+            enums::RegionType type,
             uint32_t startAddress,
             uint32_t size,
-            RegionFlag flag,
+            enums::RegionFlag flag,
             const std::string& regionName,
             const std::string& regionDescription)
     : MMElement("REGION",

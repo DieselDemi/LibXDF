@@ -9,7 +9,7 @@ namespace dd::libxdf::types {
     public:
         MMMath(std::string equation);
     private:
-        std::vector<char> GetAllVariables(std::string& equation);
+        static std::vector<char> GetAllVariables(std::string& equation);
     };
 
 } // types

@@ -4,7 +4,7 @@
 namespace dd::libxdf::types::elements {
 
 
-    MMXDFHeader::MMXDFHeader(XDFHeaderFlags flags,
+    MMXDFHeader::MMXDFHeader(enums::HeaderFlags flags,
                              float fileVersion,
                              std::string title,
                              std::string description,

@@ -9,7 +9,7 @@ int main(int argc, char** argv) {
     dd::libxdf::types::elements::XDFRootTag rootTag;
 
     rootTag.AddElement(new dd::libxdf::types::elements::MMXDFHeader(
-            dd::libxdf::types::elements::XDFHeaderFlags::UNKNOWN,
+            dd::libxdf::types::elements::HeaderFlags::UNKNOWN,
             0.f, //File Version
             "Example Title", //Title
             "Description", //Description

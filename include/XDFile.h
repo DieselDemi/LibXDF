@@ -7,8 +7,8 @@
 #include <utility>
 #include <vector>
 
-#include "types/elements/XDFRootTag.h"
-#include "include/XDFTypes.h"
+#include "elements/XDFRootTag.h"
+#include "XDFTypes.h"
 
 
 namespace dd::libxdf {

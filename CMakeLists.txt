@@ -20,7 +20,7 @@ set(SRCS
         types/elements/MMXDFConstant.cpp
         types/elements/MMXDFConstant.h
         XDFile.cpp
-        XDFile.h
+        include/XDFile.h
         types/elements/MMXDFHeader.cpp
         types/elements/MMXDFHeader.h
         types/elements/MMXDFChecksum.cpp

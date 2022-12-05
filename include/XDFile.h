@@ -10,7 +10,6 @@
 #include "elements/XDFRootTag.h"
 #include "XDFTypes.h"
 
-
 namespace dd::libxdf {
     static uint64_t unique;
 

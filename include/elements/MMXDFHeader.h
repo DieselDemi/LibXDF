@@ -1,9 +1,9 @@
 #ifndef XDFCREATOR_MMXDFHEADER_H
 #define XDFCREATOR_MMXDFHEADER_H
 
-#include <MMElement.h>
-#include <MMCategory.h>
-#include <MMTypes.h>
+#include "../MMElement.h"
+#include "../MMCategory.h"
+#include "../MMTypes.h"
 
 namespace dd::libxdf::types::elements {
     class MMXDFHeader : public MMElement {

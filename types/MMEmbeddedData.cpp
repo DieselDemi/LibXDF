@@ -1,4 +1,4 @@
-#include "MMEmbeddedData.h"
+#include "../include/MMEmbeddedData.h"
 #include "../crossplatform/XdfStringFormat.h"
 
 namespace dd::libxdf::types {

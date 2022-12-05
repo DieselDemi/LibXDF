@@ -12,43 +12,45 @@ set(SRCS
         exceptions/XdfFileException.cpp
         exceptions/XdfFileException.h
         types/MMElement.cpp
-        types/MMElement.h
+        include/MMElement.h
         types/MMAttribute.cpp
-        types/MMAttribute.h
+        include/MMAttribute.h
         types/elements/XDFRootTag.cpp
-        types/elements/XDFRootTag.h
+        include/elements/XDFRootTag.h
         types/elements/MMXDFConstant.cpp
-        types/elements/MMXDFConstant.h
+        include/elements/MMXDFConstant.h
         XDFile.cpp
         include/XDFile.h
         types/elements/MMXDFHeader.cpp
-        types/elements/MMXDFHeader.h
+        include/elements/MMXDFHeader.h
         types/elements/MMXDFChecksum.cpp
-        types/elements/MMXDFChecksum.h
+        include/elements/MMXDFChecksum.h
         types/elements/MMXDFFlag.cpp
-        types/elements/MMXDFFlag.h
+        include/elements/MMXDFFlag.h
         types/elements/MMXDFAxis.cpp
-        types/elements/MMXDFAxis.h
+        include/elements/MMXDFAxis.h
         types/MMEmbeddedData.cpp
-        types/MMEmbeddedData.h
+        include/MMEmbeddedData.h
         types/elements/MMXDFTable.cpp
-        types/elements/MMXDFTable.h
+        include/elements/MMXDFTable.h
         types/MMDefaultsElement.cpp
-        types/MMDefaultsElement.h
+        include/MMDefaultsElement.h
         types/MMCategory.cpp
-        types/MMCategory.h
+        include/MMCategory.h
         types/MMMath.cpp
-        types/MMMath.h
+        include/MMMath.h
         crossplatform/XdfStringFormat.h
         types/elements/MMXDFFunction.cpp
-        types/elements/MMXDFFunction.h
+        include/elements/MMXDFFunction.h
         types/elements/MMXDFPatch.cpp
-        types/elements/MMXDFPatch.h
+        include/elements/MMXDFPatch.h
         types/elements/MMXDFPatchEntry.cpp
-        types/elements/MMXDFPatchEntry.h
-        types/MMRegion.cpp types/MMRegion.h types/MMTypes.h)
+        include/elements/MMXDFPatchEntry.h
+        types/MMRegion.cpp
+        include/MMRegion.h
+        include/MMTypes.h)
 
-include_directories(types)
+include_directories(include)
 
 if(LIBXDF_BUILD_TESTS)
     add_subdirectory(tests)

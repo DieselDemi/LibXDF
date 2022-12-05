@@ -1,4 +1,4 @@
-#include "MMXDFChecksum.h"
+#include "../../include/elements/MMXDFChecksum.h"
 #include "../../crossplatform/XdfStringFormat.h"
 
 namespace dd::libxdf::types::elements {

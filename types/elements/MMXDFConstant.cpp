@@ -1,5 +1,5 @@
-#include "MMXDFConstant.h"
-#include "../MMMath.h"
+#include "../../include/elements/MMXDFConstant.h"
+#include "../../include/MMMath.h"
 #include "../../crossplatform/XdfStringFormat.h"
 
 namespace dd::libxdf::types::elements {

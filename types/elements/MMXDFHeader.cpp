@@ -1,5 +1,5 @@
-#include "MMXDFHeader.h"
-#include "../MMDefaultsElement.h"
+#include "../../include/elements/MMXDFHeader.h"
+#include "../../include/MMDefaultsElement.h"
 
 namespace dd::libxdf::types::elements {
 

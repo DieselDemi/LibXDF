@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include "MMElement.h"
+#include "../include/MMElement.h"
 #include "../crossplatform/XdfStringFormat.h"
 
 namespace dd::libxdf::types {

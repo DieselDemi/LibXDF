@@ -1,4 +1,4 @@
-#include "MMXDFPatchEntry.h"
+#include "../../include/elements/MMXDFPatchEntry.h"
 #include "../../crossplatform/XdfStringFormat.h"
 
 namespace dd::libxdf::types::elements {

@@ -1,4 +1,4 @@
-#include "MMAttribute.h"
+#include "../include/MMAttribute.h"
 
 namespace dd::libxdf::types {
     std::string MMAttribute::ToString() const {

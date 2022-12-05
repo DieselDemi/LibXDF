@@ -1,6 +1,6 @@
-#include "MMXDFAxis.h"
-#include "../MMEmbeddedData.h"
-#include "../MMMath.h"
+#include "../../include/elements/MMXDFAxis.h"
+#include "../../include/MMEmbeddedData.h"
+#include "../../include/MMMath.h"
 
 namespace dd::libxdf::types::elements {
 

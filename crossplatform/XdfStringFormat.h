@@ -1,10 +1,10 @@
 #ifndef XDFCREATOR_XDFSTRINGFORMAT_H
 #define XDFCREATOR_XDFSTRINGFORMAT_H
 
-#ifdef _WIN32
-#include <format>
-#define format(arg, ...) std::format(arg, __VA_ARGS__)
-#else
+//#ifdef _WIN32
+//#include <format>
+//#define format(arg, ...) std::format(arg, __VA_ARGS__)
+//#else
 #include <memory>
 #include <iostream>
 #include <cstdlib>
@@ -24,6 +24,6 @@ std::string string_format(const std::string& format, Args ... args) {
     return NumToHex(args...);
 }
 #define format(arg, ...) string_format(arg, __VA_ARGS__)
-#endif
+//#endif
 
 #endif //XDFCREATOR_XDFSTRINGFORMAT_H

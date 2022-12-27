@@ -24,12 +24,15 @@ namespace dd::libxdf::types::enums {
     };
 
     enum class CalculationMethod {
-        //TODO: Fill out all the calculating methods
-        UNKNOWN = 0
+        SUM = 0,
+        TWOS_COMPLIANT = 1,
+        ONES_COMPLIANT = 2,
+        UNKNOWN = 0xff
     };
 
     enum class RegionType: uint64_t {
         //TODO: All the region types
+        CHECKSUM = 0,
         DEFAULT = 0xFFFFFFFF
     };
 

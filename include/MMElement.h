@@ -11,8 +11,9 @@
 namespace dd::libxdf::types {
     class MMElement {
     public:
-        explicit MMElement(std::string name, std::string textValue = "", bool displayUID = false);
-        MMElement(std::string name, std::initializer_list<MMAttribute> attributes, bool displayUID = false);
+        explicit MMElement(std::string name, std::string textValue, bool displayUID = false);
+        explicit MMElement(std::string name, std::initializer_list<MMAttribute> attributes, bool displayUID = false);
+        explicit MMElement(std::string name, bool displayUID = false);
         ~MMElement();
 
         void SetUniqueId(uint64_t id);

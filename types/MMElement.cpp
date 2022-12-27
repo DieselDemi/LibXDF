@@ -32,6 +32,14 @@ namespace dd::libxdf::types {
         }
     }
 
+    MMElement::MMElement(std::string name, bool displayUID) {
+        this->name = std::move(name);
+        this->uniqueId = XDFile::NextUnique();
+
+        if(displayUID) {
+            this->InsertAttribute({.name="uniqueid", .value=this->GetUniqueHexId()});
+        }
+    }
 
     void MMElement::SetName(const std::string &newName) {
         this->name = newName;

@@ -6,13 +6,12 @@ namespace dd::libxdf::types::elements {
                                  uint32_t regionDataStart,
                                  uint32_t regionDataEnd,
                                  uint32_t storeAddress,
-                                 enums::CalculationMethod calculationMethod) : MMElement("XDFCHECKSUM") {
+                                 enums::CalculationMethod calculationMethod) : MMElement("XDFCHECKSUM", true) {
 
-        //TODO Add a checksum region element
         auto *titleElement = new MMElement("title", std::move(title));
-//        auto *regionElement = new MMRegion("REGION", regionDataStart, regionDataEnd, storeAddress, calculationMethod);
+        auto *regionElement = new MMRegion(regionDataStart, regionDataEnd, storeAddress, calculationMethod);
 
         this->InsertElement(titleElement);
-//        this->InsertElement(regionElement);
+        this->InsertElement(regionElement);
     }
 }

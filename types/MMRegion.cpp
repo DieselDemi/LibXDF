@@ -20,5 +20,18 @@ namespace dd::libxdf::types {
             {.name="regionflags", .value = format("{:#x}", static_cast<uint32_t>(flag))},
             {.name="name", .value = regionName},
             {.name="desc", .value = regionDescription}
-    }, false) { /*Nothing to do here*/ }
+    }, false) { /* Nothing to do here */ }
+
+    MMRegion::MMRegion(
+            uint32_t startAddress,
+            uint32_t endAddress,
+            uint32_t storeAddress,
+            enums::CalculationMethod calculationMethod)
+    : MMElement("REGION",
+    {
+            {.name="datastart", .value=format("{:#x}", startAddress)},
+            {.name="dataend", .value=format("{:#x}", endAddress)},
+            {.name="storeaddress", .value=format("{:#x}", storeAddress)},
+            {.name="calculationmethod", .value=format("{:#x}", static_cast<uint32_t>(calculationMethod))},
+    }, false) { /* Nothing to do here */ }
 } // types

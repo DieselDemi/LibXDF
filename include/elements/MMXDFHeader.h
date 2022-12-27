@@ -4,6 +4,7 @@
 #include "../MMElement.h"
 #include "../MMCategory.h"
 #include "../MMTypes.h"
+#include "MMRegion.h"
 
 namespace dd::libxdf::types::elements {
     class MMXDFHeader : public MMElement {
@@ -16,6 +17,7 @@ namespace dd::libxdf::types::elements {
                 std::string author,
                 uint32_t offset,
                 uint32_t offsetSubtract,
+                MMRegion* region,
                 std::initializer_list<MMCategory*> categories);
         std::string ToString() override;
     };

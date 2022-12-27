@@ -21,6 +21,14 @@ TEST(GenerationNotEmpty, DocumentIsGenerated) {
         "Author",
         0,
         0,
+        new MMRegion(
+                enums::RegionType::DEFAULT,
+                0,
+                0,
+                enums::RegionFlag::DEFAULT,
+                "No Name",
+                "No Description"
+        ),
         {}
     ));
 
@@ -38,6 +46,14 @@ TEST(GenerationNotEmpty, DocumentHasASingleElement) {
             "Author",
             0,
             0,
+            new MMRegion(
+                    enums::RegionType::DEFAULT,
+                    0,
+                    0,
+                    enums::RegionFlag::DEFAULT,
+                    "No Name",
+                    "No Description"
+            ),
             {}
     ));
 
@@ -56,6 +72,14 @@ TEST(GenerationStringNotEmpty, DocumentHasOutputAsString) {
             "Author", //Author
             0, //Base offset, as an integer
             0, //Base offset subtraction as an integer
+            new MMRegion(
+                enums::RegionType::DEFAULT,
+                0,
+                0,
+                enums::RegionFlag::DEFAULT,
+                "No Name",
+                "No Description"
+            ),
             {} //An initializer list of categories
     ));
 

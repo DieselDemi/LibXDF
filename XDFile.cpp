@@ -23,4 +23,8 @@ namespace dd::libxdf {
         return documentRoot.ToString();
     }
 
+    types::elements::XDFRootTag &XDFile::GetRootTag() {
+        return this->documentRoot;
+    }
+
 }

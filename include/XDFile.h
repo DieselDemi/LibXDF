@@ -26,9 +26,12 @@ namespace dd::libxdf {
             documentRoot.AddElement(element);
         }
 
+
         ///Standard member functions
         void RemoveElement(std::string&);
         bool WriteToDisk(const std::string& fileName);
+        types::elements::XDFRootTag& GetRootTag();
+
         std::string Print();
 
 

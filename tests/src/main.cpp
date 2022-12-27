@@ -80,5 +80,4 @@ TEST(RegionTest, RegionElementGeneration) {
     auto* region = new MMRegion(enums::RegionType::DEFAULT, 0, 700000, enums::RegionFlag::DEFAULT, "Binary File", "");
     EXPECT_STREQ(region->ToString().c_str(), "<REGION desc=\"\" name=\"Binary File\" regionflags=\"0x0000\" size=\"0xaae60\" startaddress=\"0x0000\" type=\"0xffffffff\"/>\n");
     delete region;
-
 }

@@ -21,6 +21,14 @@ TEST(GenerationNotEmpty, DocumentIsGenerated) {
         "Author",
         0,
         0,
+        new MMRegion(
+                enums::RegionType::DEFAULT,
+                0,
+                0,
+                enums::RegionFlag::DEFAULT,
+                "No Name",
+                "No Description"
+        ),
         {}
     ));
 
@@ -38,6 +46,14 @@ TEST(GenerationNotEmpty, DocumentHasASingleElement) {
             "Author",
             0,
             0,
+            new MMRegion(
+                    enums::RegionType::DEFAULT,
+                    0,
+                    0,
+                    enums::RegionFlag::DEFAULT,
+                    "No Name",
+                    "No Description"
+            ),
             {}
     ));
 
@@ -56,6 +72,14 @@ TEST(GenerationStringNotEmpty, DocumentHasOutputAsString) {
             "Author", //Author
             0, //Base offset, as an integer
             0, //Base offset subtraction as an integer
+            new MMRegion(
+                enums::RegionType::DEFAULT,
+                0,
+                0,
+                enums::RegionFlag::DEFAULT,
+                "No Name",
+                "No Description"
+            ),
             {} //An initializer list of categories
     ));
 
@@ -80,5 +104,4 @@ TEST(RegionTest, RegionElementGeneration) {
     auto* region = new MMRegion(enums::RegionType::DEFAULT, 0, 700000, enums::RegionFlag::DEFAULT, "Binary File", "");
     EXPECT_STREQ(region->ToString().c_str(), "<REGION desc=\"\" name=\"Binary File\" regionflags=\"0x0000\" size=\"0xaae60\" startaddress=\"0x0000\" type=\"0xffffffff\"/>\n");
     delete region;
-
 }

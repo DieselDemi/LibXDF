@@ -1,4 +1,5 @@
 #include "../include/MMMath.h"
+#include "../crossplatform/XdfStringFormat.h"
 
 #include <utility>
 
@@ -7,9 +8,40 @@ namespace dd::libxdf::types {
             MMElement("MATH", {{.name="equation", .value=std::move(equation)}}) {
 
         for (const auto &equationVariable: GetAllVariables(equation)) {
-            //TODO(Demi): The var's here can be linked to other XDF items via the unique id
-            this->InsertElement(new MMElement("VAR", {{.name="id", .value=std::to_string(equationVariable)}}));
+            this->InsertElement(new MMVar(equationVariable));
         }
+    }
+
+    MMMath::MMMath(std::string equation, std::initializer_list<MMVar> variables) :
+            MMElement("MATH", {{.name="equation", .value=std::move(equation)}})
+    {
+        for (auto &var: variables) {
+            this->InsertElement(new MMVar(var.GetVariable(), var.GetLinkId()));
+        }
+    }
+
+    MMVar::MMVar(char variable) :
+            MMElement("VAR", {{.name="id", .value=std::to_string(variable)}}),
+            variable(variable)
+    { }
+
+    //      <VAR id="X" type="link" linkid="0x394C" />
+    MMVar::MMVar(char variable, uint64_t linkId) :
+            MMElement("VAR", {
+                {.name="id", .value=std::to_string(variable)},
+                {.name="type", .value="link"},
+                {.name="linkid", .value=format(":#x", linkId)}
+            }),
+            linkId(linkId),
+            variable(variable)
+    { }
+
+    uint64_t MMVar::GetLinkId() const {
+        return this->linkId;
+    }
+
+    char MMVar::GetVariable() const {
+        return this->variable;
     }
 
     std::vector<char> MMMath::GetAllVariables(std::string &equation) {

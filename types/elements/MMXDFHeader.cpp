@@ -11,6 +11,7 @@ namespace dd::libxdf::types::elements {
                              std::string author,
                              uint32_t offset,
                              uint32_t offsetSubtract,
+                             MMRegion* region,
                              std::initializer_list<MMCategory *> categories) : MMElement("XDFHEADER")
     {
         this->InsertElement(new MMElement("flags", std::to_string((uint8_t)flags)));
@@ -21,16 +22,7 @@ namespace dd::libxdf::types::elements {
         this->InsertElement(new MMElement("BASEOFFSET", {{.name="offset", .value="TODO - offset value"}, {.name="subtract", .value="TODO - subtract value"}}));
         this->InsertElement(new MMDefaultsElement());
 
-        //TODO(Demi) Move this to its own class
-        this->InsertElement(new MMElement("REGION", {
-                {.name="type", .value="TODO - fix these attributes"},
-                {.name="startaddress", .value="TODO - fix these attributes"},
-                {.name="size", .value="TODO - fix these attributes"},
-                {.name="regioncolor", .value="TODO - fix these attributes"},
-                {.name="regionflags", .value="TODO - fix these attributes"},
-                {.name="name", .value="TODO - fix these attributes"},
-                {.name="desc", .value="TODO - fix these attributes"}
-        }));
+        this->InsertElement(region);
 
         for(auto category : categories) {
             this->InsertElement(category);

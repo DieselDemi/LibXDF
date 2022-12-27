@@ -10,11 +10,32 @@ namespace dd::libxdf::types::elements {
     public:
         explicit MMXDFConstant(
                 MMEmbeddedData *embeddedData,
+                enums::DataType dataType,
+                enums::UnitType unitType,
                 std::string title,
                 std::string description,
                 float rangeHigh,
                 float rangeLow,
+                std::string equation,
                 enums::ConstantFlags flags);
+
+        explicit MMXDFConstant(
+                MMEmbeddedData *embeddedData,
+                std::string title,
+                std::string description,
+                float rangeHigh,
+                float rangeLow,
+                std::string equation,
+                enums::ConstantFlags flags);
+
+        explicit MMXDFConstant(
+                MMEmbeddedData *embeddedData,
+                std::string title,
+                std::string description,
+                float rangeHigh,
+                float rangeLow,
+                std::string equation);
+
     };
 }
 

@@ -8,7 +8,7 @@ namespace dd::libxdf::types {
             uint8_t signedValue,
             uint8_t lsbFirst,
             uint8_t floatValue
-    ) : MMElement("DEFAULTS", {
+    ) : MMElement("DEFAULTS", enums::ElementType::DEFAULTS, {
             {.name="datasizeinbits", .value=std::to_string(dataSizeInBits)},
             {.name="sigdigits", .value=std::to_string(sigDigits)},
             {.name="outputtype", .value=std::to_string(outputType)},

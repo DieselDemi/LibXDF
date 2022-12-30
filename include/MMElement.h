@@ -7,18 +7,25 @@
 #include <vector>
 
 #include "MMAttribute.h"
+#include "MMTypes.h"
 
 namespace dd::libxdf::types {
     class MMElement {
     public:
-        explicit MMElement(std::string name, std::string textValue, bool displayUID = false);
-        explicit MMElement(std::string name, std::initializer_list<MMAttribute> attributes, bool displayUID = false);
-        explicit MMElement(std::string name, bool displayUID = false);
+        explicit MMElement(std::string name, enums::ElementType type, std::string textValue, bool displayUID = false);
+        explicit MMElement(std::string name, enums::ElementType type, std::initializer_list<MMAttribute> attributes, bool displayUID = false);
+        explicit MMElement(std::string name, enums::ElementType type, bool displayUID = false);
         ~MMElement();
 
         void SetUniqueId(uint64_t id);
         void SetName(const std::string& newName);
         void SetText(const std::string& newText);
+
+        [[nodiscard]]
+        std::string& GetName() const;
+
+        [[nodiscard]]
+        std::string& GetInnerText() const;
 
         void AddElement(MMElement*);
         void AddAttribute(const MMAttribute&);
@@ -26,7 +33,11 @@ namespace dd::libxdf::types {
         void RemoveElement(std::string& uid);
         void RemoveAttribute(std::string& key);
 
-        MMElement& GetElement(const std::string&);
+        MMElement& GetElementByHexId(const std::string& elementHexId);
+        MMElement& GetElementByUID(uint64_t uid);
+        MMElement* GetElementByName(const std::string& elementName);
+
+        enums::ElementType GetElementType();
 
         std::vector<MMElement*> GetAllElements();
 
@@ -46,6 +57,8 @@ namespace dd::libxdf::types {
         std::string text;
         std::map<std::string, MMElement*> children;
         std::map<std::string, MMAttribute> attributes;
+
+        enums::ElementType elementType;
     };
 
 } // types

@@ -5,7 +5,7 @@
 
 namespace dd::libxdf::types {
     MMMath::MMMath(std::string equation) :
-            MMElement("MATH", {{.name="equation", .value=std::move(equation)}}) {
+            MMElement("MATH", enums::ElementType::MATH, {{.name="equation", .value=std::move(equation)}}) {
 
         for (const auto &equationVariable: GetAllVariables(equation)) {
             this->InsertElement(new MMVar(equationVariable));
@@ -13,7 +13,7 @@ namespace dd::libxdf::types {
     }
 
     MMMath::MMMath(std::string equation, std::initializer_list<MMVar> variables) :
-            MMElement("MATH", {{.name="equation", .value=std::move(equation)}})
+            MMElement("MATH", enums::ElementType::MATH, {{.name="equation", .value=std::move(equation)}})
     {
         for (auto &var: variables) {
             this->InsertElement(new MMVar(var.GetVariable(), var.GetLinkId()));
@@ -21,13 +21,13 @@ namespace dd::libxdf::types {
     }
 
     MMVar::MMVar(char variable) :
-            MMElement("VAR", {{.name="id", .value=std::to_string(variable)}}),
+            MMElement("VAR", enums::ElementType::VAR, {{.name="id", .value=std::to_string(variable)}}),
             variable(variable)
     { }
 
     //      <VAR id="X" type="link" linkid="0x394C" />
     MMVar::MMVar(char variable, uint64_t linkId) :
-            MMElement("VAR", {
+            MMElement("VAR", enums::ElementType::VAR, {
                 {.name="id", .value=std::to_string(variable)},
                 {.name="type", .value="link"},
                 {.name="linkid", .value=format(":#x", linkId)}

@@ -4,6 +4,26 @@
 #include <cstdint>
 
 namespace dd::libxdf::types::enums {
+    enum class ElementType {
+         AXIS,
+         CHECKSUUM,
+         CONSTANT,
+         FLAG,
+         FUNCTION,
+         HEADER,
+         PATCH,
+         PATCHENTRY,
+         TABLE,
+         CATEGORY,
+         DEFAULTS,
+         EMBEDDED_DATA,
+         MATH,
+         VAR,
+         REGION,
+         GENERIC
+    };
+
+
     enum class HeaderFlags {
         UNKNOWN = 0x1
     };
@@ -14,15 +34,15 @@ namespace dd::libxdf::types::enums {
         SECOND = 0xd
     };
 
-    enum class OutputType: uint8_t {
+    enum class OutputType : uint8_t {
         NONE = 0x0,
-        FLOATING_POINT = 0x1,
-        INTEGER = 0x2,
-        HEX_DIGITS = 0x3,
-        ASCII_STRING = 0x4
+        FLOATING_POINT,
+        INTEGER,
+        HEX_DIGITS,
+        ASCII_STRING,
     };
 
-    enum class DataType: uint8_t {
+    enum class DataType : uint8_t {
         EXTERNALLY_DEFINED = 0x0,
         NONE,
         UNDEFINED,
@@ -98,7 +118,7 @@ namespace dd::libxdf::types::enums {
         WHEEL_SPEED_REAR_RIGHT
     };
 
-    enum class UnitType: uint8_t {
+    enum class UnitType : uint8_t {
         EXTERNALLY_DEFINED = 0x0,
         NONE,
         UNDEFINED,
@@ -204,18 +224,18 @@ namespace dd::libxdf::types::enums {
     };
 
     enum class CalculationMethod {
-        SUM = 0,
-        TWOS_COMPLIANT = 1,
-        ONES_COMPLIANT = 2,
+        SUM = 0x0,
+        TWOS_COMPLIANT,
+        ONES_COMPLIANT,
         UNKNOWN = 0xff
     };
 
-    enum class RegionType: uint64_t {
+    enum class RegionType : uint64_t {
         //TODO: All the region types
         DEFAULT = 0xFFFFFFFF
     };
 
-    enum class RegionFlag: uint32_t {
+    enum class RegionFlag : uint32_t {
         //TODO: All the region flags
         DEFAULT = 0x0
     };

@@ -12,14 +12,14 @@ namespace dd::libxdf::types::elements {
                              uint32_t offset,
                              uint32_t offsetSubtract,
                              MMRegion* region,
-                             std::initializer_list<MMCategory *> categories) : MMElement("XDFHEADER")
+                             std::initializer_list<MMCategory *> categories) : MMElement("XDFHEADER", enums::ElementType::HEADER)
     {
-        this->InsertElement(new MMElement("flags", std::to_string((uint8_t)flags)));
-        this->InsertElement(new MMElement("fileversion", std::to_string(fileVersion)));
-        this->InsertElement(new MMElement("deftitle", std::move(title)));
-        this->InsertElement(new MMElement("description", std::move(description)));
-        this->InsertElement(new MMElement("author", std::move(author)));
-        this->InsertElement(new MMElement("BASEOFFSET", {{.name="offset", .value="TODO - offset value"}, {.name="subtract", .value="TODO - subtract value"}}));
+        this->InsertElement(new MMElement("flags", enums::ElementType::GENERIC, std::to_string((uint8_t)flags)));
+        this->InsertElement(new MMElement("fileversion", enums::ElementType::GENERIC, std::to_string(fileVersion)));
+        this->InsertElement(new MMElement("deftitle", enums::ElementType::GENERIC, std::move(title)));
+        this->InsertElement(new MMElement("description", enums::ElementType::GENERIC, std::move(description)));
+        this->InsertElement(new MMElement("author", enums::ElementType::GENERIC, std::move(author)));
+        this->InsertElement(new MMElement("BASEOFFSET", enums::ElementType::GENERIC, {{.name="offset", .value="TODO - offset value"}, {.name="subtract", .value="TODO - subtract value"}}));
         this->InsertElement(new MMDefaultsElement());
 
         this->InsertElement(region);

@@ -6,10 +6,11 @@
 #include "../crossplatform/XdfStringFormat.h"
 
 namespace dd::libxdf::types {
-    MMElement::MMElement(std::string name, std::initializer_list<MMAttribute> attributes, bool displayUID) {
+    MMElement::MMElement(std::string name, enums::ElementType type, std::initializer_list<MMAttribute> attributes, bool displayUID) {
         this->name = std::move(name);
         this->text = "";
         this->uniqueId = XDFile::NextUnique();
+        this->elementType = type;
 
         if(attributes.size() != 0) {
             for (const auto &attr: attributes) {
@@ -22,19 +23,21 @@ namespace dd::libxdf::types {
         }
     }
 
-    MMElement::MMElement(std::string name, std::string textValue, bool displayUID) {
+    MMElement::MMElement(std::string name, enums::ElementType type, std::string textValue, bool displayUID) {
         this->name = std::move(name);
         this->text = std::move(textValue);
         this->uniqueId = XDFile::NextUnique();
+        this->elementType = type;
 
         if(displayUID) {
             this->InsertAttribute({.name="uniqueid", .value=this->GetUniqueHexId()});
         }
     }
 
-    MMElement::MMElement(std::string name, bool displayUID) {
+    MMElement::MMElement(std::string name, enums::ElementType type, bool displayUID) {
         this->name = std::move(name);
         this->uniqueId = XDFile::NextUnique();
+        this->elementType = type;
 
         if(displayUID) {
             this->InsertAttribute({.name="uniqueid", .value=this->GetUniqueHexId()});
@@ -53,8 +56,22 @@ namespace dd::libxdf::types {
         InsertAttribute(attribute);
     }
 
-    MMElement &MMElement::GetElement(const std::string &elementHexId) {
+    MMElement &MMElement::GetElementByHexId(const std::string &elementHexId) {
         return *this->children.find(elementHexId)->second;
+    }
+
+    MMElement &MMElement::GetElementByUID(uint64_t uid) {
+        return *this->children.find(NumToHex(uid))->second;
+    }
+
+    MMElement *MMElement::GetElementByName(const std::string &elementName) {
+        for (auto &child: this->children) {
+            if(child.second->GetName() == elementName) {
+                return child.second;
+            }
+        }
+
+        return nullptr;
     }
 
     MMAttribute &MMElement::GetAttribute(const std::string &attributeName) {
@@ -139,5 +156,15 @@ namespace dd::libxdf::types {
         this->attributes.erase(key);
     }
 
+    std::string &MMElement::GetName() const {
+        return const_cast<std::string &>(this->name);
+    }
 
+    std::string &MMElement::GetInnerText() const {
+        return const_cast<std::string &>(this->text);
+    }
+
+    enums::ElementType MMElement::GetElementType() {
+        return this->elementType;
+    }
 } // types

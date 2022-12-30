@@ -7,7 +7,7 @@ namespace dd::libxdf::types {
             uint32_t elementSize,
             uint8_t majorStride,
             uint8_t minorStride
-    ) : MMElement("EMBEDDEDDATA", {
+    ) : MMElement("EMBEDDEDDATA", enums::ElementType::EMBEDDED_DATA, {
             {.name = "mmedaddress", .value = format("{:#x}", address)},
             {.name = "mmedelementsizebits", .value = std::to_string(elementSize)},
             {.name = "mmedmajorstridebits", .value = std::to_string(majorStride)},

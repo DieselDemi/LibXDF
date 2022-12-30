@@ -12,19 +12,19 @@ namespace dd::libxdf::types::elements {
                                  float rangeLow,
                                  std::string equation,
                                  enums::ConstantFlags flags) :
-            MMElement("XDFCONSTANT",
+            MMElement("XDFCONSTANT", enums::ElementType::CONSTANT,
                       {
                               {.name = "flags", .value = format("{:#x}", static_cast<int>(flags))}
                       }, true) {
 
-        InsertElement(new MMElement("title", std::move(title)));
-        InsertElement(new MMElement("description", std::move(description)));
+        InsertElement(new MMElement("title", enums::ElementType::GENERIC, std::move(title)));
+        InsertElement(new MMElement("description", enums::ElementType::GENERIC, std::move(description)));
         InsertElement(embeddedData);
-        InsertElement(new MMElement("rangehigh", std::to_string(rangeHigh)));
-        InsertElement(new MMElement("rangelow", std::to_string(rangeLow)));
-        InsertElement(new MMElement("datatype", static_cast<uint32_t>(dataType)));
-        InsertElement(new MMElement("unittype", static_cast<uint32_t>(unitType)));
-        InsertElement(new MMElement("DALINK", {{.name="index", .value="0"}}));
+        InsertElement(new MMElement("rangehigh", enums::ElementType::GENERIC, std::to_string(rangeHigh)));
+        InsertElement(new MMElement("rangelow", enums::ElementType::GENERIC, std::to_string(rangeLow)));
+        InsertElement(new MMElement("datatype", enums::ElementType::GENERIC, static_cast<uint32_t>(dataType)));
+        InsertElement(new MMElement("unittype", enums::ElementType::GENERIC, static_cast<uint32_t>(unitType)));
+        InsertElement(new MMElement("DALINK", enums::ElementType::GENERIC, {{.name="index", .value="0"}}));
         InsertElement(new MMMath(std::move(equation)));
     }
 
@@ -35,19 +35,19 @@ namespace dd::libxdf::types::elements {
                                  float rangeLow,
                                  std::string equation,
                                  enums::ConstantFlags flags) :
-    MMElement("XDFCONSTANT",
+    MMElement("XDFCONSTANT", enums::ElementType::CONSTANT,
     {
         {.name = "flags", .value = format("{:#x}", static_cast<int>(flags))}
     }, true) {
 
-        InsertElement(new MMElement("title", std::move(title)));
-        InsertElement(new MMElement("description", std::move(description)));
+        InsertElement(new MMElement("title", enums::ElementType::GENERIC, std::move(title)));
+        InsertElement(new MMElement("description", enums::ElementType::GENERIC, std::move(description)));
         InsertElement(embeddedData);
-        InsertElement(new MMElement("rangehigh", std::to_string(rangeHigh)));
-        InsertElement(new MMElement("rangelow", std::to_string(rangeLow)));
-        InsertElement(new MMElement("datatype", "0"));
-        InsertElement(new MMElement("unittype", "0"));
-        InsertElement(new MMElement("DALINK", {{.name="index", .value="0"}}));
+        InsertElement(new MMElement("rangehigh", enums::ElementType::GENERIC, std::to_string(rangeHigh)));
+        InsertElement(new MMElement("rangelow", enums::ElementType::GENERIC, std::to_string(rangeLow)));
+        InsertElement(new MMElement("datatype", enums::ElementType::GENERIC, "0"));
+        InsertElement(new MMElement("unittype", enums::ElementType::GENERIC, "0"));
+        InsertElement(new MMElement("DALINK", enums::ElementType::GENERIC, {{.name="index", .value="0"}}));
         InsertElement(new MMMath(std::move(equation)));
     }
 
@@ -57,16 +57,16 @@ namespace dd::libxdf::types::elements {
                                  float rangeHigh,
                                  float rangeLow,
                                  std::string equation) :
-    MMElement("XDFCONSTANT", true)
+    MMElement("XDFCONSTANT", enums::ElementType::GENERIC, true)
     {
-        InsertElement(new MMElement("title", std::move(title)));
-        InsertElement(new MMElement("description", std::move(description)));
+        InsertElement(new MMElement("title", enums::ElementType::GENERIC, std::move(title)));
+        InsertElement(new MMElement("description", enums::ElementType::GENERIC, std::move(description)));
         InsertElement(embeddedData);
-        InsertElement(new MMElement("rangehigh", std::to_string(rangeHigh)));
-        InsertElement(new MMElement("rangelow", std::to_string(rangeLow)));
-        InsertElement(new MMElement("datatype", "0x0"));
-        InsertElement(new MMElement("unittype", "0x0"));
-        InsertElement(new MMElement("DALINK", {{.name = "index", .value = "0"}}));
+        InsertElement(new MMElement("rangehigh", enums::ElementType::GENERIC, std::to_string(rangeHigh)));
+        InsertElement(new MMElement("rangelow", enums::ElementType::GENERIC, std::to_string(rangeLow)));
+        InsertElement(new MMElement("datatype", enums::ElementType::GENERIC, "0x0"));
+        InsertElement(new MMElement("unittype", enums::ElementType::GENERIC, "0x0"));
+        InsertElement(new MMElement("DALINK", enums::ElementType::GENERIC, {{.name = "index", .value = "0"}}));
         InsertElement(new MMMath(std::move(equation)));
 
     }

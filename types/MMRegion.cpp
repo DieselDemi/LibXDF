@@ -12,7 +12,7 @@ namespace dd::libxdf::types {
             enums::RegionFlag flag,
             const std::string& regionName,
             const std::string& regionDescription)
-    : MMElement("REGION",
+    : MMElement("REGION", enums::ElementType::REGION,
     {
             {.name="type", .value = format("{:#x}", static_cast<uint64_t>(type))},
             {.name="startaddress", .value = format("{:#x}", startAddress)},
@@ -27,7 +27,7 @@ namespace dd::libxdf::types {
             uint32_t endAddress,
             uint32_t storeAddress,
             enums::CalculationMethod calculationMethod)
-    : MMElement("REGION",
+    : MMElement("REGION", enums::ElementType::REGION,
     {
             {.name="datastart", .value=format("{:#x}", startAddress)},
             {.name="dataend", .value=format("{:#x}", endAddress)},

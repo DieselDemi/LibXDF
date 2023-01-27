@@ -57,7 +57,7 @@ namespace dd::libxdf::types::elements {
                                  float rangeHigh,
                                  float rangeLow,
                                  std::string equation) :
-    MMElement("XDFCONSTANT", enums::ElementType::GENERIC, true)
+    MMElement("XDFCONSTANT", enums::ElementType::CONSTANT, true)
     {
         InsertElement(new MMElement("title", enums::ElementType::GENERIC, std::move(title)));
         InsertElement(new MMElement("description", enums::ElementType::GENERIC, std::move(description)));

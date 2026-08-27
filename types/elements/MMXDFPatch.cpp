@@ -1,6 +1,7 @@
 #include "../../include/elements/MMXDFPatch.h"
 
 namespace dd::libxdf::types::elements {
+    MMXDFPatch::MMXDFPatch(ParsedTag) : MMElement("XDFPATCH", enums::ElementType::PATCH) {}
 
     MMXDFPatch::MMXDFPatch(
             std::string title,

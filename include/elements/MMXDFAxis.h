@@ -3,11 +3,13 @@
 
 #include "../MMElement.h"
 #include "../MMEmbeddedData.h"
+#include "../MMMath.h"
 
 namespace dd::libxdf::types::elements {
 
     class MMXDFAxis : public MMElement {
     public:
+        explicit MMXDFAxis(ParsedTag);
         explicit MMXDFAxis(
                 MMEmbeddedData* embeddedData,
                 const std::string& axisId = "X",
@@ -19,6 +21,10 @@ namespace dd::libxdf::types::elements {
                 double minValue = 0.00,
                 double maxValue = 255.00,
                 uint8_t outputTypeValue = 1);
+
+        [[nodiscard]] std::string GetAxisId() const;
+        [[nodiscard]] MMEmbeddedData* GetEmbeddedData();
+        [[nodiscard]] std::vector<MMMath*> GetMathElements();
     };
 
 } // elements

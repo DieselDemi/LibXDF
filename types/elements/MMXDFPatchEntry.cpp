@@ -2,6 +2,8 @@
 #include "../../crossplatform/XdfStringFormat.h"
 
 namespace dd::libxdf::types::elements {
+    MMXDFPatchEntry::MMXDFPatchEntry(ParsedTag) : MMElement("XDFPATCHENTRY", enums::ElementType::PATCHENTRY) {}
+
     MMXDFPatchEntry::MMXDFPatchEntry(std::string name, uint32_t address, uint32_t datasize, std::string patchData) :
         MMElement("XDFPATCHENTRY", enums::ElementType::PATCHENTRY, {
         {.name="name", .value=std::move(name)},

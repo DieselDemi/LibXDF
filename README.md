@@ -1,67 +1,60 @@
-Example Usage: 
+# LibXDF
 
-```c++
-#include <iostream> 
-#include <XDFTypes> 
+LibXDF parses and generates TunerPro XDF documents using the same concrete
+object graph. Known tags become the existing `MMXDF*`, `MMEmbeddedData`,
+`MMMath`, and `MMVar` classes. Unknown vendor tags remain generic `MMElement`
+children and are retained when the document is written again.
 
-int main(int argc, char** argv) { 
-    
-    dd::libxdf::types::elements::XDFRootTag rootTag;
+## Parsing
 
-    rootTag.AddElement(new dd::libxdf::types::elements::MMXDFHeader(
-            dd::libxdf::types::elements::HeaderFlags::UNKNOWN,
-            0.f, //File Version
-            "Example Title", //Title
-            "Description", //Description
-            "Author", //Author
-            0, //Base offset, as an integer
-            0, //Base offset subtraction as an integer
-            {} //An initializer list of categories
-    ));
-    
-    rootTag.AddElement(new dd::libxdf::types::elements::MMXDFFlag(
-            new dd::libxdf::types::MMEmbeddedData(
-                0 //Address
-            ), //Embedded Data
-            "Basic Flag",
-            "Description", 
-            0 //Mask value as uint8_t 
-    ));
-    
-    std::cout << rootTag.ToString() << std::endl; 
-    
-    return 0; 
+```cpp
+#include <XDFile.h>
+
+dd::libxdf::XDFile file;
+file.ReadFromDisk("definition.xdf");
+
+using dd::libxdf::types::elements::MMXDFTable;
+auto* table = dynamic_cast<MMXDFTable*>(
+        file.GetRootTag().GetElementByName("XDFTABLE"));
+
+if (table != nullptr) {
+    auto* axis = table->GetAxis("z");
+    auto* data = axis == nullptr ? nullptr : axis->GetEmbeddedData();
+    if (data != nullptr) {
+        const auto address = data->GetAddress();
+        const auto elementSize = data->GetElementSizeBits();
+    }
 }
+
+const auto diagnostics = file.Validate();
+file.WriteToDisk("round-trip.xdf");
 ```
-##Outputs
-```html
-<XDFFORMAT version="1.700000"><XDFHEADER><flags>1</flags>
-	
-<fileversion>0.000000</fileversion>
-	
-<deftitle>Example Title</deftitle>
-	
-<description>Description</description>
-	
-<author>Author</author>
-	
-<BASEOFFSET offset="TODO - offset value" subtract="TODO - subtract value"/>
-	
-<DEFAULTS datasizeinbits="8" float="0" lsbfirst="0" outputtype="1" sigdigits="2" signed="0"/>
-	
-<REGION desc="TODO - fix these attributes" name="TODO - fix these attributes" regioncolor="TODO - fix these attributes" regionflags="TODO - fix these attributes" size="TODO - fix these attributes" startaddress="TODO - fix these attributes" type="TODO - fix these attributes"/>
-	
-</XDFHEADER>
-	
-<XDFFLAG uniqueid="0x00000020"><EMBEDDEDDATA mmedaddress="0x0000" mmedelementsizebits="32" mmedmajorstridebits="0" mmedminorstridebits="0"/>
-	
-<title>Basic Flag</title>
-	
-<description>Description</description>
-	
-<mask>0x0</mask>
-	
-</XDFFLAG>
-	
-</XDFFORMAT>
+
+Malformed XML throws `XdfFileException`. Semantically unusual but common XDF
+content, such as duplicate placeholder IDs or label-count mismatches, remains
+loaded and is reported through `Validate()`.
+
+## Generation
+
+Existing constructors remain available. Passing a pointer to `AddElement`
+transfers ownership to its parent.
+
+```cpp
+#include <XDFile.h>
+
+using namespace dd::libxdf::types;
+using namespace dd::libxdf::types::elements;
+
+dd::libxdf::XDFile file;
+file.AddElement(new MMXDFFlag(
+        new MMEmbeddedData(0x100, 8),
+        "Feature switch",
+        "Enables the feature",
+        0x01));
+
+file.WriteToDisk("generated.xdf");
 ```
+
+TinyXML2 is resolved through CMake. Tests exercise static and shared builds,
+the concrete parsed object graph, validation, XML escaping, and round trips of
+the XDF files under `examples/`.

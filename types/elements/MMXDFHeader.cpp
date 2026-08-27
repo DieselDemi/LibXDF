@@ -2,6 +2,7 @@
 #include "../../include/MMDefaultsElement.h"
 
 namespace dd::libxdf::types::elements {
+    MMXDFHeader::MMXDFHeader(ParsedTag) : MMElement("XDFHEADER", enums::ElementType::HEADER) {}
 
 
     MMXDFHeader::MMXDFHeader(enums::HeaderFlags flags,
@@ -19,13 +20,15 @@ namespace dd::libxdf::types::elements {
         this->InsertElement(new MMElement("deftitle", enums::ElementType::GENERIC, std::move(title)));
         this->InsertElement(new MMElement("description", enums::ElementType::GENERIC, std::move(description)));
         this->InsertElement(new MMElement("author", enums::ElementType::GENERIC, std::move(author)));
-        this->InsertElement(new MMElement("BASEOFFSET", enums::ElementType::GENERIC, {{.name="offset", .value="TODO - offset value"}, {.name="subtract", .value="TODO - subtract value"}}));
+        this->InsertElement(new MMElement("BASEOFFSET", enums::ElementType::GENERIC, {
+                {.name="offset", .value=std::to_string(offset)},
+                {.name="subtract", .value=std::to_string(offsetSubtract)}}));
         this->InsertElement(new MMDefaultsElement());
 
-        this->InsertElement(region);
+        if (region != nullptr) this->InsertElement(region);
 
         for(auto category : categories) {
-            this->InsertElement(category);
+            if (category != nullptr) this->InsertElement(category);
         }
     }
 

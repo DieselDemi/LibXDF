@@ -3,6 +3,8 @@
 #include "../../crossplatform/XdfStringFormat.h"
 
 namespace dd::libxdf::types::elements {
+    MMXDFConstant::MMXDFConstant(ParsedTag) : MMElement("XDFCONSTANT", enums::ElementType::CONSTANT) {}
+
     MMXDFConstant::MMXDFConstant(MMEmbeddedData *embeddedData,
                                  enums::DataType dataType,
                                  enums::UnitType unitType,
@@ -22,8 +24,8 @@ namespace dd::libxdf::types::elements {
         InsertElement(embeddedData);
         InsertElement(new MMElement("rangehigh", enums::ElementType::GENERIC, std::to_string(rangeHigh)));
         InsertElement(new MMElement("rangelow", enums::ElementType::GENERIC, std::to_string(rangeLow)));
-        InsertElement(new MMElement("datatype", enums::ElementType::GENERIC, static_cast<uint32_t>(dataType)));
-        InsertElement(new MMElement("unittype", enums::ElementType::GENERIC, static_cast<uint32_t>(unitType)));
+        InsertElement(new MMElement("datatype", enums::ElementType::GENERIC, std::to_string(static_cast<uint32_t>(dataType))));
+        InsertElement(new MMElement("unittype", enums::ElementType::GENERIC, std::to_string(static_cast<uint32_t>(unitType))));
         InsertElement(new MMElement("DALINK", enums::ElementType::GENERIC, {{.name="index", .value="0"}}));
         InsertElement(new MMMath(std::move(equation)));
     }
@@ -69,6 +71,18 @@ namespace dd::libxdf::types::elements {
         InsertElement(new MMElement("DALINK", enums::ElementType::GENERIC, {{.name = "index", .value = "0"}}));
         InsertElement(new MMMath(std::move(equation)));
 
+    }
+
+    MMEmbeddedData* MMXDFConstant::GetEmbeddedData() {
+        return dynamic_cast<MMEmbeddedData*>(GetElementByName("EMBEDDEDDATA"));
+    }
+
+    std::vector<MMMath*> MMXDFConstant::GetMathElements() {
+        std::vector<MMMath*> math;
+        for (auto* element : GetElementsByName("MATH")) {
+            if (auto* typed = dynamic_cast<MMMath*>(element)) math.push_back(typed);
+        }
+        return math;
     }
 
 

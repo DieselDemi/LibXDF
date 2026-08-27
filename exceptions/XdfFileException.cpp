@@ -1,5 +1,3 @@
 #include "XdfFileException.h"
 
-//const char *XdfFileException::what() const {
-//    return exception::what();
-//}
+XdfFileException::XdfFileException(const std::string& message) : std::runtime_error(message) {}

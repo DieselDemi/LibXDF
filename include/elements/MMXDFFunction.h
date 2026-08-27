@@ -8,7 +8,10 @@ namespace dd::libxdf::types::elements {
 
     class MMXDFFunction : public MMElement {
     public:
+        explicit MMXDFFunction(ParsedTag);
         explicit MMXDFFunction(std::string title, std::string description, std::initializer_list<MMXDFAxis*> axis);
+        [[nodiscard]] std::vector<MMXDFAxis*> GetAxes();
+        [[nodiscard]] MMXDFAxis* GetAxis(const std::string& axisId);
     };
 
 } // elements

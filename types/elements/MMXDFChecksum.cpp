@@ -2,6 +2,8 @@
 #include "../../crossplatform/XdfStringFormat.h"
 
 namespace dd::libxdf::types::elements {
+    MMXDFChecksum::MMXDFChecksum(ParsedTag) : MMElement("XDFCHECKSUM", enums::ElementType::CHECKSUUM) {}
+
     MMXDFChecksum::MMXDFChecksum(std::string title,
                                  uint32_t regionDataStart,
                                  uint32_t regionDataEnd,

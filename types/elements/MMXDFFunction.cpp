@@ -1,6 +1,8 @@
 #include "../../include/elements/MMXDFFunction.h"
 
 namespace dd::libxdf::types::elements {
+    MMXDFFunction::MMXDFFunction(ParsedTag) : MMElement("XDFFUNCTION", enums::ElementType::FUNCTION) {}
+
     MMXDFFunction::MMXDFFunction(
             std::string title,
             std::string description,
@@ -18,5 +20,20 @@ namespace dd::libxdf::types::elements {
         for (auto axi: axis) {
             this->InsertElement(static_cast<MMElement *>(axi));
         }
+    }
+
+    std::vector<MMXDFAxis*> MMXDFFunction::GetAxes() {
+        std::vector<MMXDFAxis*> axes;
+        for (auto* element : GetElementsByName("XDFAXIS")) {
+            if (auto* axis = dynamic_cast<MMXDFAxis*>(element)) axes.push_back(axis);
+        }
+        return axes;
+    }
+
+    MMXDFAxis* MMXDFFunction::GetAxis(const std::string& axisId) {
+        for (auto* axis : GetAxes()) {
+            if (axis->GetAxisId() == axisId) return axis;
+        }
+        return nullptr;
     }
 }

@@ -7,6 +7,7 @@ namespace dd::libxdf::types {
 
     class MMDefaultsElement : public MMElement {
     public:
+        explicit MMDefaultsElement(ParsedTag);
         explicit MMDefaultsElement(
                 uint32_t dataSizeInBits = 8,
                 uint8_t sigDigits = 2,

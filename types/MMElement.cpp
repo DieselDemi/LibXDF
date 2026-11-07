@@ -1,11 +1,31 @@
 #include "../include/XDFile.h"
 
 #include <string>
+#include <algorithm>
+#include <stdexcept>
 
 #include "../include/MMElement.h"
 #include "../crossplatform/XdfStringFormat.h"
 
 namespace dd::libxdf::types {
+    namespace {
+        std::string EscapeText(const std::string& value) {
+            std::string escaped;
+            escaped.reserve(value.size());
+
+            for (const char character : value) {
+                switch (character) {
+                    case '&': escaped += "&amp;"; break;
+                    case '<': escaped += "&lt;"; break;
+                    case '>': escaped += "&gt;"; break;
+                    default: escaped += character; break;
+                }
+            }
+
+            return escaped;
+        }
+    }
+
     MMElement::MMElement(std::string name, enums::ElementType type, std::initializer_list<MMAttribute> attributes, bool displayUID) {
         this->name = std::move(name);
         this->text = "";
@@ -57,11 +77,15 @@ namespace dd::libxdf::types {
     }
 
     MMElement &MMElement::GetElementByHexId(const std::string &elementHexId) {
-        return *this->children.find(elementHexId)->second;
+        const auto element = this->children.find(elementHexId);
+        if (element == this->children.end()) {
+            throw std::out_of_range("XDF element ID not found: " + elementHexId);
+        }
+        return *element->second;
     }
 
     MMElement &MMElement::GetElementByUID(uint64_t uid) {
-        return *this->children.find(NumToHex(uid))->second;
+        return GetElementByHexId(NumToHex(uid));
     }
 
     MMElement *MMElement::GetElementByName(const std::string &elementName) {
@@ -74,8 +98,29 @@ namespace dd::libxdf::types {
         return nullptr;
     }
 
+    const MMElement *MMElement::GetElementByName(const std::string &elementName) const {
+        for (const auto *child: this->childOrder) {
+            if(child->GetName() == elementName) return child;
+        }
+        return nullptr;
+    }
+
     MMAttribute &MMElement::GetAttribute(const std::string &attributeName) {
-        return this->attributes.find(attributeName)->second;
+        const auto attribute = this->attributes.find(attributeName);
+        if (attribute == this->attributes.end()) {
+            throw std::out_of_range("XDF attribute not found: " + attributeName);
+        }
+        return attribute->second;
+    }
+
+    MMAttribute* MMElement::FindAttribute(const std::string& attributeName) {
+        const auto attribute = this->attributes.find(attributeName);
+        return attribute == this->attributes.end() ? nullptr : &attribute->second;
+    }
+
+    const MMAttribute* MMElement::FindAttribute(const std::string& attributeName) const {
+        const auto attribute = this->attributes.find(attributeName);
+        return attribute == this->attributes.end() ? nullptr : &attribute->second;
     }
 
     uint64_t MMElement::GetUniqueId() const {
@@ -87,11 +132,20 @@ namespace dd::libxdf::types {
     }
 
     void MMElement::InsertAttribute(const MMAttribute &attribute) {
-        this->attributes.insert({attribute.name, attribute});
+        this->attributes.insert_or_assign(attribute.name, attribute);
     }
 
     void MMElement::InsertElement(MMElement *element) {
+        if (element == nullptr) {
+            throw std::invalid_argument("Cannot add a null XDF element");
+        }
+
+        while (this->children.contains(element->GetUniqueHexId())) {
+            element->SetUniqueId(XDFile::NextUnique());
+        }
+
         this->children.insert({element->GetUniqueHexId(), element});
+        this->childOrder.push_back(element);
     }
 
     void MMElement::SetUniqueId(uint64_t id) {
@@ -115,10 +169,10 @@ namespace dd::libxdf::types {
             return toStringStream.str();
         } else {
             toStringStream << ">";
-            toStringStream << this->text;
+            toStringStream << EscapeText(this->text);
 
-            for (auto &element: this->children) {
-                toStringStream << element.second->ToString() << "\t\n";
+            for (auto *element: this->childOrder) {
+                toStringStream << element->ToString();
             }
 
             toStringStream << "</" << this->name << ">" << std::endl;
@@ -131,29 +185,73 @@ namespace dd::libxdf::types {
         this->text = newText;
     }
 
-    //TODO(Demi): Needs implementation desperately
     MMElement::~MMElement() {
-        for(const auto& element : this->children) {
-            delete element.second;
-        }
+        ClearElements();
     }
 
     std::vector<MMElement *> MMElement::GetAllElements() {
         std::vector<MMElement *> _ret;
 
-        for (const auto &elementPair: children) {
-            _ret.emplace_back(elementPair.second);
+        for (auto *element: childOrder) {
+            _ret.emplace_back(element);
         }
 
         return _ret;
     }
 
+    std::vector<const MMElement *> MMElement::GetAllElements() const {
+        std::vector<const MMElement *> result;
+        result.reserve(childOrder.size());
+        for (const auto *element : childOrder) result.push_back(element);
+        return result;
+    }
+
     void MMElement::RemoveElement(std::string &uid) {
-        this->children.erase(uid);
+        const auto element = this->children.find(uid);
+        if (element == this->children.end()) {
+            return;
+        }
+
+        MMElement* removed = element->second;
+        this->childOrder.erase(
+                std::remove(this->childOrder.begin(), this->childOrder.end(), removed),
+                this->childOrder.end());
+        this->children.erase(element);
+        delete removed;
     }
 
     void MMElement::RemoveAttribute(std::string &key) {
         this->attributes.erase(key);
+    }
+
+    void MMElement::ClearElements() {
+        for (auto *element : this->childOrder) {
+            delete element;
+        }
+        this->childOrder.clear();
+        this->children.clear();
+    }
+
+    void MMElement::ClearAttributes() {
+        this->attributes.clear();
+    }
+
+    std::vector<MMElement*> MMElement::GetElementsByName(const std::string& elementName) {
+        std::vector<MMElement*> matches;
+        for (auto *element : this->childOrder) {
+            if (element->GetName() == elementName) {
+                matches.push_back(element);
+            }
+        }
+        return matches;
+    }
+
+    std::vector<const MMElement*> MMElement::GetElementsByName(const std::string& elementName) const {
+        std::vector<const MMElement*> matches;
+        for (const auto *element : this->childOrder) {
+            if (element->GetName() == elementName) matches.push_back(element);
+        }
+        return matches;
     }
 
     std::string &MMElement::GetName() const {

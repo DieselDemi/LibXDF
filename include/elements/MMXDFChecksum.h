@@ -7,6 +7,7 @@
 namespace dd::libxdf::types::elements {
     class MMXDFChecksum final: public MMElement {
     public:
+        explicit MMXDFChecksum(ParsedTag);
         explicit MMXDFChecksum(
                 std::string title,
                 uint32_t regionDataStart,

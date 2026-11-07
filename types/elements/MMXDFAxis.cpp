@@ -3,6 +3,7 @@
 #include "../../include/MMMath.h"
 
 namespace dd::libxdf::types::elements {
+    MMXDFAxis::MMXDFAxis(ParsedTag) : MMElement("XDFAXIS", enums::ElementType::AXIS) {}
 
     MMXDFAxis::MMXDFAxis(
             MMEmbeddedData* embeddedData,
@@ -22,13 +23,13 @@ namespace dd::libxdf::types::elements {
 
 //        auto *embeddedData = new MMEmbeddedData(0);
 
-        if (axisId == "X" || axisId == "Y") {
+        if (axisId == "X" || axisId == "Y" || axisId == "x" || axisId == "y") {
             this->InsertElement(new MMElement("indexcount", enums::ElementType::GENERIC, std::to_string(indexCountValue)));
             this->InsertElement(new MMElement("datatype", enums::ElementType::GENERIC, std::to_string(dataTypeValue)));
             this->InsertElement(new MMElement("unittype", enums::ElementType::GENERIC, std::to_string(unitTypeValue)));
             this->InsertElement(new MMElement("DALINK", enums::ElementType::GENERIC, {{.name="index", .value="0"}}));
             this->InsertElement(new MMElement("LABEL", enums::ElementType::GENERIC, {{.name="index", .value="0"}, {.name="value", .value="0.00"}}));
-        } else if (axisId == "Z") {
+        } else if (axisId == "Z" || axisId == "z") {
             this->InsertElement(new MMElement("decimalpl", enums::ElementType::GENERIC, std::to_string(decimalPlaceValue)));
             this->InsertElement(new MMElement("min", enums::ElementType::GENERIC, std::to_string(minValue)));
             this->InsertElement(new MMElement("max", enums::ElementType::GENERIC, std::to_string(maxValue)));
@@ -39,5 +40,22 @@ namespace dd::libxdf::types::elements {
 
         this->InsertElement(embeddedData);
         this->InsertElement(mathElement);
+    }
+
+    std::string MMXDFAxis::GetAxisId() const {
+        const auto* attribute = FindAttribute("id");
+        return attribute == nullptr ? std::string{} : attribute->value;
+    }
+
+    MMEmbeddedData* MMXDFAxis::GetEmbeddedData() {
+        return dynamic_cast<MMEmbeddedData*>(GetElementByName("EMBEDDEDDATA"));
+    }
+
+    std::vector<MMMath*> MMXDFAxis::GetMathElements() {
+        std::vector<MMMath*> math;
+        for (auto* element : GetElementsByName("MATH")) {
+            if (auto* typed = dynamic_cast<MMMath*>(element)) math.push_back(typed);
+        }
+        return math;
     }
 } // elements

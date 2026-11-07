@@ -4,11 +4,12 @@
 #include "../MMElement.h"
 #include "../MMCategory.h"
 #include "../MMTypes.h"
-#include "MMRegion.h"
+#include "../MMRegion.h"
 
 namespace dd::libxdf::types::elements {
     class MMXDFHeader : public MMElement {
     public:
+        explicit MMXDFHeader(ParsedTag);
         explicit MMXDFHeader(
                 enums::HeaderFlags flags,
                 float fileVersion,

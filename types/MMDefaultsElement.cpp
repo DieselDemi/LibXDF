@@ -1,6 +1,8 @@
 #include "../include/MMDefaultsElement.h"
 
 namespace dd::libxdf::types {
+    MMDefaultsElement::MMDefaultsElement(ParsedTag) : MMElement("DEFAULTS", enums::ElementType::DEFAULTS) {}
+
     MMDefaultsElement::MMDefaultsElement(
             uint32_t dataSizeInBits,
             uint8_t sigDigits,

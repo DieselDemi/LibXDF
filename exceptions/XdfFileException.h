@@ -2,11 +2,12 @@
 #define XDFCREATOR_XDFFILEEXCEPTION_H
 
 
-#include <exception>
+#include <stdexcept>
+#include <string>
 
-class XdfFileException : public std::exception{
+class XdfFileException : public std::runtime_error {
 public:
-//    const char *what() const override;
+    explicit XdfFileException(const std::string& message);
 };
 
 

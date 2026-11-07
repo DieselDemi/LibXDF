@@ -5,6 +5,8 @@
 //<REGION type="0xFFFFFFFF" startaddress="0x0" size="700000" regionflags="0x0" name="Binary File" desc="" />
 
 namespace dd::libxdf::types {
+    MMRegion::MMRegion(ParsedTag) : MMElement("REGION", enums::ElementType::REGION) {}
+
     MMRegion::MMRegion(
             enums::RegionType type,
             uint32_t startAddress,
@@ -12,7 +14,7 @@ namespace dd::libxdf::types {
             enums::RegionFlag flag,
             const std::string& regionName,
             const std::string& regionDescription)
-    : MMElement("REGION",
+    : MMElement("REGION", enums::ElementType::REGION,
     {
             {.name="type", .value = format("{:#x}", static_cast<uint64_t>(type))},
             {.name="startaddress", .value = format("{:#x}", startAddress)},
@@ -20,5 +22,18 @@ namespace dd::libxdf::types {
             {.name="regionflags", .value = format("{:#x}", static_cast<uint32_t>(flag))},
             {.name="name", .value = regionName},
             {.name="desc", .value = regionDescription}
-    }, false) { /*Nothing to do here*/ }
+    }, false) { /* Nothing to do here */ }
+
+    MMRegion::MMRegion(
+            uint32_t startAddress,
+            uint32_t endAddress,
+            uint32_t storeAddress,
+            enums::CalculationMethod calculationMethod)
+    : MMElement("REGION", enums::ElementType::REGION) {
+        AddElement(new MMElement("datastart", enums::ElementType::GENERIC, format("{:#x}", startAddress)));
+        AddElement(new MMElement("dataend", enums::ElementType::GENERIC, format("{:#x}", endAddress)));
+        AddElement(new MMElement("storeaddress", enums::ElementType::GENERIC, format("{:#x}", storeAddress)));
+        AddElement(new MMElement("calculationmethod", enums::ElementType::GENERIC,
+                                 format("{:#x}", static_cast<uint32_t>(calculationMethod))));
+    }
 } // types

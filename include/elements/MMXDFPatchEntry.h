@@ -8,6 +8,7 @@ namespace dd::libxdf::types::elements {
 
     class MMXDFPatchEntry final : public MMElement {
     public:
+        explicit MMXDFPatchEntry(ParsedTag);
         MMXDFPatchEntry(std::string name, uint32_t address, uint32_t datasize, std::string patchData);
     };
 

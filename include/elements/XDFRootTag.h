@@ -6,6 +6,7 @@
 namespace dd::libxdf::types::elements {
     class XDFRootTag : public MMElement {
     public:
+        explicit XDFRootTag(ParsedTag);
         explicit XDFRootTag(float version = 1.7f);
     };
 }

@@ -7,6 +7,7 @@
 namespace dd::libxdf::types::elements {
     class MMXDFPatch final : public MMElement {
     public:
+        explicit MMXDFPatch(ParsedTag);
         MMXDFPatch(std::string title, std::string description, std::initializer_list<MMXDFPatchEntry*> entries);
     };
 } // elements
